@@ -40,4 +40,13 @@ public class Wishlist {
     public void setWishlistName(String wishlistName) {
         this.wishlistName = wishlistName;
     }
+
+    @Override
+    public String toString() {
+        return "Wishlist{" +
+                "wishlistId=" + wishlistId +
+                ", wishlistName='" + wishlistName + '\'' +
+                ", wishes=" + wishes +
+                '}';
+    }
 }
