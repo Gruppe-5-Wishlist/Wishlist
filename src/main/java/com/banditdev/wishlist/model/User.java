@@ -1,19 +1,26 @@
 package com.banditdev.wishlist.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class User {
     private int userId;
     private String userEmail;
     private String userName;
     private String userPassword;
+    private List<Wishlist> wishlists;
 
 
-    public User() {}
+    public User() {
+    }
 
     public User(int userId, String userEmail, String userName, String userPassword) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
+        this.wishlists = new ArrayList<>();
     }
 
     public int getUserId() {
@@ -34,6 +41,14 @@ public class User {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void addWishlist(Wishlist wishlist) {
+        wishlists.add(wishlist);
+    }
+
+    public void removeWishlist(Wishlist wishlist) {
+        wishlists.remove(wishlist);
     }
 
     public void setUserName(String userName) {
