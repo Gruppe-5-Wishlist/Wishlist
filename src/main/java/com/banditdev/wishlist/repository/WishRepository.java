@@ -101,19 +101,18 @@ public class WishRepository {
                 WHERE wish_id = ?
                 """;
 
-        Wish result = jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                        new Wish(
-                                rs.getInt("wish_id"),
-                                rs.getString("wish_name"),
-                                rs.getString("wish_description"),
-                                rs.getString("wish_link"),
-                                rs.getDouble("wish_price"),
-                                rs.getInt("wishlist_id")
-                        ),
-                idToFind
-        );
         return
-                result;
+                jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                                new Wish(
+                                        rs.getInt("wish_id"),
+                                        rs.getString("wish_name"),
+                                        rs.getString("wish_description"),
+                                        rs.getString("wish_link"),
+                                        rs.getDouble("wish_price"),
+                                        rs.getInt("wishlist_id")
+                                ),
+                        idToFind
+                );
     }
 
 

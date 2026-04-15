@@ -19,8 +19,6 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    public List<User> findAll()
-
     public User addUser (User user) {
         String sql = """
                 INSERT INTO user (user_id, user_email, user_name, user_password) VALUES (?, ?, ?, ?)
@@ -52,15 +50,27 @@ public class UserRepository {
         jdbcTemplate.update(sql, userID);
     }
 
-//    public User findUserById (int id) {
-//        String sql = """
-//                SELECT
-//                    user_id,
-//                    user_email,
-//                    user_name,
-//                    user_password
-//                FROM user""";
-//    }
+    public User findUserById (int id) {
+        String sql = """
+                SELECT
+                    user_id,
+                    user_email,
+                    user_name,
+                    user_password
+                FROM user
+                """;
+
+        return
+            jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                        new User(
+                            rs.getInt("user_id"),
+                            rs.getString("user_email"),
+                            rs.getString("user_name"),
+                            rs.getString("user_password")
+                        ),
+                    id
+            );
+    }
 
     public void updateUser (User user) {
         String sql = """
@@ -77,8 +87,4 @@ public class UserRepository {
                 user.getUserId()
         );
     }
-    //TODO List<Object> findAll() {}
-
-    //TODO public Object findObjectById(int idToFind) {}
-
 }
