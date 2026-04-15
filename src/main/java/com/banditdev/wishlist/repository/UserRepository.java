@@ -1,7 +1,10 @@
 package com.banditdev.wishlist.repository;
 
+import com.banditdev.wishlist.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -10,6 +13,10 @@ public class UserRepository {
 
     public UserRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<User> findAll() {
+        return List.of();
     }
 
     //TODO List<Object> findAll() {}
