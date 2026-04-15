@@ -41,6 +41,10 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
+    public List<Wish> getWishes() {
+        return wishes;
+    }
+
     @Override
     public String toString() {
         return "Wishlist{" +
