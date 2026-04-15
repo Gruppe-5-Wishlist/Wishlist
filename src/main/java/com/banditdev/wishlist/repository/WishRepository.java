@@ -19,7 +19,7 @@ public class WishRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Wish> findAll() {
+    public List<Wish> findAllWishes() {
 
         String sql = """
                 SELECT
