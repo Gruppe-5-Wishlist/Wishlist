@@ -23,7 +23,7 @@ public class WishlistRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Wishlist> findAll() {
+    public List<Wishlist> findAllWishlists() {
         String sql = """
             SELECT
                 wl.wishlist_id,
@@ -61,7 +61,8 @@ public class WishlistRepository {
                             rs.getString("wish_name"),
                             rs.getString("wish_description"),
                             rs.getString("wish_link"),
-                            rs.getDouble("wish_price")
+                            rs.getDouble("wish_price"),
+                            rs.getInt("wishlist_id")
                     );
 
                     wishlist.addWish(wish);
@@ -136,7 +137,8 @@ public class WishlistRepository {
                             rs.getString("wish_name"),
                             rs.getString("wish_description"),
                             rs.getString("wish_link"),
-                            rs.getDouble("wish_price")
+                            rs.getDouble("wish_price"),
+                            rs.getInt("wishlist_id")
                     ));
                 }
             }
