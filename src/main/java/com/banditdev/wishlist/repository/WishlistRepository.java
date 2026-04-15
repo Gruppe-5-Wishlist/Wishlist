@@ -114,9 +114,12 @@ public class WishlistRepository {
                 w.wish_description,
                 w.wish_link,
                 w.wish_price
-            FROM wishlist wl
-            LEFT JOIN wish w
-                ON wl.wishlist_id = w.wishlist_id
+                            FROM wishlist wl
+                            LEFT
+                JOIN wish w
+                ON wl.
+                    wishlist_id = w.wishlist_id
+                WHERE wl.wishlist_id = ?
             """;
 
         return jdbcTemplate.query(sql, rs -> {
