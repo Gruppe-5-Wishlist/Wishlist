@@ -27,7 +27,8 @@ public class WishRepository {
                     wish.wish_name,
                     wish.wish_description,
                     wish.wish_link,
-                    wish.wish_price
+                    wish.wish_price, 
+                    wish.wishlist_id
                 FROM wish
                 JOIN wishlist wl ON wish.wishlist_id = wl.wishlist_id
                 JOIN user u ON wl.user_id = u.user_id
