@@ -79,11 +79,6 @@ public class UserRepository {
     }
     //TODO List<Object> findAll() {}
 
-    //TODO public Object addObject(Object obj) {} -- COMPLETED
-
-    //TODO public void deleteObjectById(int idToDelete) {} -- COMPLETED
-
     //TODO public Object findObjectById(int idToFind) {}
 
-    //TODO public void updateObject(Object obj) {} -- COMPLETED
 }
