@@ -27,7 +27,8 @@ public class WishRepository {
                     wish.wish_name,
                     wish.wish_description,
                     wish.wish_link,
-                    wish.wish_price
+                    wish.wish_price,
+                    wish.wishlist_id
                 FROM wish
                 JOIN wishlist wl ON wish.wishlist_id = wl.wishlist_id
                 JOIN user u ON wl.user_id = u.user_id
@@ -73,7 +74,6 @@ public class WishRepository {
             throw new IllegalStateException("Failed to get KeyHolder id.");
         }
 
-
         return new Wish(key.intValue(), wish.getWishName(), wish.getWishDescription(), wish.getWishLink(), wish.getWishPrice(), wish.getWishlistId());
     }
 
@@ -95,7 +95,8 @@ public class WishRepository {
                     wish_name,
                     wish_description,
                     wish_link,
-                    wish_price
+                    wish_price,
+                    wish.wishlist_id
                 FROM wish
                 WHERE wish_id = ?
                 """;
