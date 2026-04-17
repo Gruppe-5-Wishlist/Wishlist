@@ -51,7 +51,7 @@ public class WishRepository {
     }
 
 
-    public Wish addWish(Wish wish) {
+    public Wish addWish(Wish wish, int wishlistId) {
         String sql = """
                 INSERT INTO wishlist_db.wish (wish_name, wish_description, wish_link, wish_price, wishlist_id)
                 VALUES (?, ?, ?, ?, ?)
@@ -65,7 +65,7 @@ public class WishRepository {
             ps.setString(2, wish.getWishDescription());
             ps.setString(3, wish.getWishLink());
             ps.setDouble(4, wish.getWishPrice());
-            ps.setInt(5, wish.getWishlistId());
+            ps.setInt(5, wishlistId);
             return ps;
         }, kh);
 
@@ -75,7 +75,7 @@ public class WishRepository {
         }
 
 
-        return new Wish(key.intValue(), wish.getWishName(), wish.getWishDescription(), wish.getWishLink(), wish.getWishPrice(), wish.getWishlistId());
+        return new Wish(key.intValue(), wish.getWishName(), wish.getWishDescription(), wish.getWishLink(), wish.getWishPrice(), wishlistId);
     }
 
 

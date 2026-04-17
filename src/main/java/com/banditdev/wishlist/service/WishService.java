@@ -17,8 +17,8 @@ public class WishService {
         return wishRepository.findAllWishes();
     }
 
-    public Wish addWish(Wish wish) {
-        return wishRepository.addWish(wish);
+    public Wish addWish(Wish wish, int wishlistId) {
+        return wishRepository.addWish(wish, wishlistId);
     }
 
     public void deleteWishById(int idToDelete) {
