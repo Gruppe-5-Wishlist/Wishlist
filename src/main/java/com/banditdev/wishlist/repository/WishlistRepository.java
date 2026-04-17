@@ -162,5 +162,6 @@ public class WishlistRepository {
                 wishlist.getWishlistName(),
                 wishlist.getWishlistId()
         );
+
     }
 }
