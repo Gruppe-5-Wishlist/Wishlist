@@ -46,6 +46,7 @@ public class WishRepository {
                         rs.getString("wish_link"),
                         rs.getDouble("wish_price"),
                         rs.getInt("wishlist_id")
+
                 )
         );
     }
