@@ -30,14 +30,13 @@ public class UserService {
         userRepository.updateUser(user);
     }
 
-    public boolean validateUser(String userEmail, String userPassword) {
+    public User findUserByEmail(String emailToFind) {
+        return userRepository.findUserByEmail(emailToFind);
+    }
 
+    public boolean validateUser(String userEmail, String userPassword) {
             User user = userRepository.findUserByEmail(userEmail);
-            if (user != null && user.getUserPassword().equals(userPassword)) {
-                return true;
-            } else {
-                return false;
-            }
+        return user != null && user.getUserPassword().equals(userPassword);
     }
 }
 //TODO - Make a login() validation method with if statement - needs review

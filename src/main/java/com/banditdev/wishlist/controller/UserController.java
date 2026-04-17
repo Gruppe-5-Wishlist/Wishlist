@@ -32,11 +32,17 @@ public class UserController {
     public String login(@RequestParam("ue") String userEmail, @RequestParam("upw") String userPassword, HttpSession session, Model model) {
 
         if (userService.validateUser(userEmail, userPassword)) {
-            session.setAttribute("user", userService.validateUser(userEmail, userPassword));
+            session.setAttribute("user", userService.findUserByEmail(userEmail));
             return "redirect:/wishlist";
         } else {
             model.addAttribute("wrongCredentials", true);
             return "login";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "index";
     }
 }
