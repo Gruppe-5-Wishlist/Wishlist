@@ -50,6 +50,29 @@ public class UserRepository {
         jdbcTemplate.update(sql, userID);
     }
 
+    public User findUserByEmail(String userEmail) {
+        String sql = """
+                SELECT
+                    user_id,
+                    user_email,
+                    user_name,
+                    user_password
+                FROM user
+                WHERE LOWER(user_email) = LOWER(?)
+                """;
+
+        return
+                jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                                new User(
+                                        rs.getInt("user_id"),
+                                        rs.getString("user_email"),
+                                        rs.getString("user_name"),
+                                        rs.getString("user_password")
+                                ),
+                        userEmail
+                );
+    }
+
     public User findUserById (int id) {
         String sql = """
                 SELECT
@@ -58,6 +81,7 @@ public class UserRepository {
                     user_name,
                     user_password
                 FROM user
+                WHERE user_id = ?
                 """;
 
         return
@@ -71,6 +95,10 @@ public class UserRepository {
                     id
             );
     }
+
+
+
+
 
     public void updateUser (User user) {
         String sql = """

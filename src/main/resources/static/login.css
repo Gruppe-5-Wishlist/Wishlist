@@ -1,0 +1,74 @@
+/* Wrapper */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 1.5rem 2rem;
+}
+
+/* Card */
+.login-card {
+    background: var(--white);
+    border: 1px solid rgba(90, 122, 92, 0.12);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(46, 74, 47, 0.12);
+}
+
+/* Title */
+.login-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Inputs */
+.login-form input {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(90, 122, 92, 0.2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: var(--sage);
+    box-shadow: 0 0 0 2px rgba(90, 122, 92, 0.1);
+}
+
+/* Buttons container */
+.login-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* Full width buttons */
+.btn-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Outline button variant */
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(46, 74, 47, 0.3);
+    color: var(--moss);
+}
+
+.btn-outline:hover {
+    background: rgba(90, 122, 92, 0.06);
+}
