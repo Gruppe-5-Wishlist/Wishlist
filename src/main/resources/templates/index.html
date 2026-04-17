@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-                    <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
                     <head>
                         <meta charset="UTF-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +7,13 @@
                         <link rel="preconnect" href="https://fonts.googleapis.com" />
                         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                         <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-                        <link rel="stylesheet" href="styles.css" />
+                        <link rel="stylesheet" th:href="@{/styles.css}" />
                     </head>
                     <body>
 
                     <!-- ─── NAVBAR ─── -->
                     <nav id="navbar">
-                        <a href="index.html" class="logo" title="Back to home">
+                        <a href="" class="logo" title="Back to home">
       <span class="logo-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
@@ -26,7 +26,7 @@
                             <li><a href="#how">How it works</a></li>
                             <li><a href="#features">Features</a></li>
                             <li><a href="#about">About us</a></li>
-                            <li><a href="login.html" class="btn-login">
+                            <li><a th:href="@{/login}" class="btn-login">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M15 3h6v18h-6M10 17l5-5-5-5M15 12H3"/>
                                 </svg>
@@ -47,7 +47,7 @@
                                     EcoWish is the wishlist platform built for people who care about what they consume. Share, discover, and give thoughtfully — with sustainability at the heart.
                                 </p>
                                 <div class="hero-cta">
-                                    <a href="login.html" class="btn-primary">
+                                    <a th:href="@{/login}" class="btn-login">
                                         Get started
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                     </a>
@@ -188,11 +188,11 @@
       </span>
                             <span class="logo-text">EcoWish</span>
                         </a>
-                        <p>© 2025 EcoWish — School project. Built with care.</p>
+                        <p>© 2026 EcoWish — School project.</p>
                         <ul class="footer-links">
                             <li><a href="#how">How it works</a></li>
                             <li><a href="#about">About us</a></li>
-                            <li><a href="login.html">Log in</a></li>
+                            <li><a th:href="@{/login}" >Log in</a></li>
                         </ul>
                     </footer>
 
