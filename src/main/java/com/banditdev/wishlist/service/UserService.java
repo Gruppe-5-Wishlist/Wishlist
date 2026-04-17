@@ -3,6 +3,7 @@ package com.banditdev.wishlist.service;
 import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,12 +30,14 @@ public class UserService {
         userRepository.updateUser(user);
     }
 
-    public User validateUser(String userEmail, String userPassword) {
-        User user = userRepository.findUserByEmail(userEmail);
-        if (user != null && user.getUserPassword().equals(userPassword)) {
-            return user;
-        }
-        return null;
+    public boolean validateUser(String userEmail, String userPassword) {
+
+            User user = userRepository.findUserByEmail(userEmail);
+            if (user != null && user.getUserPassword().equals(userPassword)) {
+                return true;
+            } else {
+                return false;
+            }
     }
 }
 //TODO - Make a login() validation method with if statement - needs review

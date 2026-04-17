@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/authenticateLogin")
     public String login(@RequestParam("ue") String userEmail, @RequestParam("upw") String userPassword, HttpSession session, Model model) {
 
-        if (userService.validateUser(userEmail, userPassword) != null) {
+        if (userService.validateUser(userEmail, userPassword)) {
             session.setAttribute("user", userService.validateUser(userEmail, userPassword));
             return "redirect:/wishlist";
         } else {
