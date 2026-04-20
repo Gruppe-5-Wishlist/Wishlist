@@ -68,10 +68,36 @@
 <main class="wishlist-wrapper">
     <h1 class="wishlist-title">Here is your wishlist</h1>
 
+    <button onclick="openModal()" style="margin-bottom: 1rem;">
+        + Add Wishlist
+    </button>
+
     <div class="wishlist-box"></div>
 
     <p class="wishlist-sub">This is a temporary placeholder for testing endpoints.</p>
 </main>
+<div id="wishlistModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
 
+    <div style="background:white; padding:25px; width:320px; margin:120px auto; border-radius:12px; text-align:center;">
+        <h3>Create Wishlist</h3>
+
+        <form action="/wishlist/add" method="post">
+            <input
+                    type="text"
+                    name="wishlistName"
+                    placeholder="Enter wishlist name"
+                    required
+                    style="width:100%; padding:8px; margin-top:10px;"
+            />
+
+            <br><br>
+
+            <button type="submit">Create</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+
+</div>
 </body>
+
 </html>
