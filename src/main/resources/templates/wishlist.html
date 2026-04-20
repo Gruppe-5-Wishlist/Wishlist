@@ -1,76 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Wishlist — EcoWish</title>
+    <title>Your Wishlists — EcoWish</title>
 
-    <!-- Fonts (same as your site) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-    <!-- Main stylesheet -->
     <link rel="stylesheet" th:href="@{/styles.css}" />
 
-    <!-- Page-specific styles -->
     <style>
         .wishlist-wrapper {
             min-height: 100vh;
+            padding: 100px 2.5rem 4rem;
+        }
+
+        .wishlist-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 120px 1.5rem 2rem;
-            flex-direction: column;
-            text-align: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
 
         .wishlist-title {
             font-family: 'Fraunces', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .add-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--moss);
+            color: #fff;
+            font-size: 1.6rem;
+            font-weight: 300;
+            text-decoration: none;
+            line-height: 1;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(46, 74, 47, 0.25);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(46, 74, 47, 0.35);
+        }
+
+        /* Grid */
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        /* Card */
+        .wishlist-card {
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+        }
+
+        .wishlist-card-inner {
+            border-radius: 16px;
+            background: var(--cream);
+            border: 1px solid rgba(90, 122, 92, 0.15);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 16px rgba(46, 74, 47, 0.08);
+        }
+
+        .wishlist-card:hover .wishlist-card-inner {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(46, 74, 47, 0.14);
+        }
+
+        .wishlist-card-icon {
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .wishlist-card-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 999px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .wishlist-card-name {
+            margin-top: 0.6rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
             color: var(--text);
         }
 
-        .wishlist-box {
-            width: 100%;
-            max-width: 600px;
-            height: 320px;
-            border-radius: 18px;
-            background: var(--white);
-            border: 2px dashed rgba(90, 122, 92, 0.35);
-            box-shadow: 0 12px 40px rgba(46, 74, 47, 0.08);
+        /* Empty state */
+        .wishlist-empty {
+            padding: 3.5rem 2rem;
+            text-align: center;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
         }
 
-        .wishlist-sub {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--muted);
+        .wishlist-empty span {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 900px) {
+            .wishlist-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .wishlist-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 
 <body>
 
-<!-- NAVBAR (optional but keeps consistency) -->
 <nav id="navbar">
     <a th:href="@{/}" class="logo">
-      <span class="logo-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
-        </svg>
-      </span>
+        <span class="logo-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
+            </svg>
+        </span>
         <span class="logo-text">EcoWish</span>
     </a>
 </nav>
 
-<!-- MAIN CONTENT -->
 <main class="wishlist-wrapper">
-    <h1 class="wishlist-title">Here is your wishlist</h1>
 
-    <div class="wishlist-box"></div>
+    <div class="wishlist-header">
+        <h1 class="wishlist-title">My wishlists</h1>
+        <a th:href="@{/wishlist/add}" class="add-btn" title="Create new wishlist">+</a>
+    </div>
 
-    <p class="wishlist-sub">This is a temporary placeholder for testing endpoints.</p>
+    <div class="wishlist-empty" th:if="${wishlists.isEmpty()}">
+        <span>🌱</span>
+        No wishlists yet — create your first one!
+    </div>
+
+    <div class="wishlist-grid" th:if="${!wishlists.isEmpty()}">
+        <a class="wishlist-card"
+           th:each="wishlist : ${wishlists}"
+           th:href="@{'/wishlist/' + ${wishlist.wishlistId}}">
+            <div class="wishlist-card-inner">
+                <span class="wishlist-card-icon">🌿</span>
+                <div class="wishlist-card-count" th:text="${wishlist.wishes.size()}">0</div>
+            </div>
+            <div class="wishlist-card-name" th:text="${wishlist.wishlistName}">Wishlist name</div>
+        </a>
+    </div>
+
 </main>
 
 </body>
