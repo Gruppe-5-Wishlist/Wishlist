@@ -55,14 +55,12 @@
             box-shadow: 0 6px 20px rgba(46, 74, 47, 0.35);
         }
 
-        /* Grid */
         .wishlist-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.25rem;
         }
 
-        /* Card */
         .wishlist-card {
             text-decoration: none;
             color: var(--text);
@@ -73,14 +71,16 @@
             border-radius: 16px;
             background: var(--cream);
             border: 1px solid rgba(90, 122, 92, 0.15);
-            height: 180px;
+            height: 240px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 16px rgba(46, 74, 47, 0.08);
+            padding: 1.5rem;
         }
 
         .wishlist-card:hover .wishlist-card-inner {
@@ -91,6 +91,15 @@
         .wishlist-card-icon {
             font-size: 2.5rem;
             opacity: 0.4;
+            margin-bottom: 0.75rem;
+        }
+
+        .wishlist-card-name {
+            font-family: 'Fraunces', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+            text-align: center;
         }
 
         .wishlist-card-count {
@@ -111,15 +120,6 @@
             font-family: 'DM Sans', sans-serif;
         }
 
-        .wishlist-card-name {
-            margin-top: 0.6rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: var(--text);
-        }
-
-        /* Empty state */
         .wishlist-empty {
             padding: 3.5rem 2rem;
             text-align: center;
@@ -148,7 +148,7 @@
 <body>
 
 <nav id="navbar">
-    <a th:href="@{/}" class="logo">
+    <a th:href="@{/wishlist}" class="logo">
         <span class="logo-icon">
             <svg viewBox="0 0 24 24">
                 <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
@@ -175,10 +175,10 @@
            th:each="wishlist : ${wishlists}"
            th:href="@{'/wishlist/' + ${wishlist.wishlistId}}">
             <div class="wishlist-card-inner">
-                <span class="wishlist-card-icon">🌿</span>
                 <div class="wishlist-card-count" th:text="${wishlist.wishes.size()}">0</div>
+                <span class="wishlist-card-icon">🌿</span>
+                <div class="wishlist-card-name" th:text="${wishlist.wishlistName}">Wishlist name</div>
             </div>
-            <div class="wishlist-card-name" th:text="${wishlist.wishlistName}">Wishlist name</div>
         </a>
     </div>
 
