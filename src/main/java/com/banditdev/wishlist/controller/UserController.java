@@ -5,10 +5,7 @@ import com.banditdev.wishlist.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("user")
@@ -45,4 +42,17 @@ public class UserController {
         session.invalidate();
         return "index";
     }
+
+    @GetMapping("/newUser")
+    public String createNewUser(Model model) {
+        model.addAttribute("user", new User());
+        return "TEST-LoginForm";
+    }
+
+    @PostMapping("/save")
+    public String saveNewUser(@ModelAttribute User user) {
+        userService.addUser(user);
+        return "redirect:/wishlist";
+    }
+
 }

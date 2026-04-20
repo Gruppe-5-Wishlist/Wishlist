@@ -1,5 +1,6 @@
 package com.banditdev.wishlist.controller;
 
+import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
