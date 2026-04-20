@@ -19,7 +19,7 @@ public class WishRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Wish> findAll() {
+    public List<Wish> findAllWishes() {
 
         String sql = """
                 SELECT
@@ -27,7 +27,7 @@ public class WishRepository {
                     wish.wish_name,
                     wish.wish_description,
                     wish.wish_link,
-                    wish.wish_price,
+                    wish.wish_price, 
                     wish.wishlist_id
                 FROM wish
                 JOIN wishlist wl ON wish.wishlist_id = wl.wishlist_id
@@ -51,7 +51,7 @@ public class WishRepository {
     }
 
 
-    public Wish addWish(Wish wish) {
+    public Wish addWish(Wish wish, int wishlistId) {
         String sql = """
                 INSERT INTO wishlist_db.wish (wish_name, wish_description, wish_link, wish_price, wishlist_id)
                 VALUES (?, ?, ?, ?, ?)
@@ -65,7 +65,7 @@ public class WishRepository {
             ps.setString(2, wish.getWishDescription());
             ps.setString(3, wish.getWishLink());
             ps.setDouble(4, wish.getWishPrice());
-            ps.setInt(5, wish.getWishlistId());
+            ps.setInt(5, wishlistId);
             return ps;
         }, kh);
 
@@ -74,7 +74,8 @@ public class WishRepository {
             throw new IllegalStateException("Failed to get KeyHolder id.");
         }
 
-        return new Wish(key.intValue(), wish.getWishName(), wish.getWishDescription(), wish.getWishLink(), wish.getWishPrice(), wish.getWishlistId());
+
+        return new Wish(key.intValue(), wish.getWishName(), wish.getWishDescription(), wish.getWishLink(), wish.getWishPrice(), wishlistId);
     }
 
 
@@ -95,25 +96,23 @@ public class WishRepository {
                     wish_name,
                     wish_description,
                     wish_link,
-                    wish_price,
-                    wish.wishlist_id
+                    wish_price
                 FROM wish
                 WHERE wish_id = ?
                 """;
 
-        Wish result = jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                        new Wish(
-                                rs.getInt("wish_id"),
-                                rs.getString("wish_name"),
-                                rs.getString("wish_description"),
-                                rs.getString("wish_link"),
-                                rs.getDouble("wish_price"),
-                                rs.getInt("wishlist_id")
-                        ),
-                idToFind
-        );
         return
-                result;
+                jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                                new Wish(
+                                        rs.getInt("wish_id"),
+                                        rs.getString("wish_name"),
+                                        rs.getString("wish_description"),
+                                        rs.getString("wish_link"),
+                                        rs.getDouble("wish_price"),
+                                        rs.getInt("wishlist_id")
+                                ),
+                        idToFind
+                );
     }
 
 
