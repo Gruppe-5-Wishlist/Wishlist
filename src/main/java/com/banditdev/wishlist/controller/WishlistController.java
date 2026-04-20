@@ -32,7 +32,7 @@ public class WishlistController {
         User currentUser = (User) session.getAttribute("user");
         List<Wishlist> wishlists = wishlistService.findWishlistsByUserId(currentUser.getUserId());
 
-        model.addAttribute(wishlists);
+        model.addAttribute("wishlists", wishlists);
 
         return "wishlist";
     }
