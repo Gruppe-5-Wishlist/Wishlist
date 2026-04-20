@@ -165,12 +165,12 @@
         <button class="add-btn" onclick="openModal()" title="Create new wishlist">+</button>
     </div>
 
-    <div class="wishlist-empty" th:if="${wishlists.isEmpty()}">
+    <div class="wishlist-empty" th:if="${wishlists == null or wishlists.isEmpty()}">
         <span>🌱</span>
         No wishlists yet — create your first one!
     </div>
 
-    <div class="wishlist-grid" th:if="${!wishlists.isEmpty()}">
+    <div class="wishlist-grid" th:if="${wishlists != null and !wishlists.isEmpty()}">
         <a class="wishlist-card"
            th:each="wishlist : ${wishlists}"
            th:href="@{'/wishlist/' + ${wishlist.wishlistId}}">

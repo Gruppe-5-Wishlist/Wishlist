@@ -24,6 +24,7 @@ public class WishlistService {
     }
 
     public List<Wishlist> findWishlistsByUserId(int id) {
+
         return wishlistRepository.findWishlistsByUserId(id);
     }
 

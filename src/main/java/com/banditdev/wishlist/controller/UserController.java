@@ -21,8 +21,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "login";
+        }
+        return "redirect:/wishlist";
     }
 
     @PostMapping("/authenticateLogin")
