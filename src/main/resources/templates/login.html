@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — EcoWish</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Main styles -->
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+
+    <!-- Login page styles -->
+    <link rel="stylesheet" th:href="@{/login.css}" />
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <a th:href="@{/}" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
+        </svg>
+      </span>
+        <span class="logo-text">EcoWish</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="/#how">How it works</a></li>
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#about">About us</a></li>
+    </ul>
+</nav>
+
+<!-- LOGIN -->
+<main class="login-wrapper">
+    <div class="login-card">
+        <h2 class="login-title">Welcome back</h2>
+
+        <form th:action="@{/user/authenticateLogin}" method="post">
+            <input type="email" name="ue" placeholder="Email" required />
+            <input type="password" name="upw" placeholder="Password" required />
+
+            <div class="login-actions">
+                <button type="submit" class="btn-primary btn-full">
+                    Log in
+                </button>
+            </div>
+        </form>
+        <a th:href="@{/user/newUser}" class="btn-login">
+            Create new account
+        </a>
+    </div>
+</main>
+
+</body>
+</html>
