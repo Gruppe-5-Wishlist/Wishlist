@@ -162,7 +162,7 @@
 
     <div class="wishlist-header">
         <h1 class="wishlist-title">My wishlists</h1>
-        <a th:href="@{/wishlist/add}" class="add-btn" title="Create new wishlist">+</a>
+        <button class="add-btn" onclick="openModal()" title="Create new wishlist">+</button>
     </div>
 
     <div class="wishlist-empty" th:if="${wishlists.isEmpty()}">
@@ -183,6 +183,40 @@
     </div>
 
 </main>
+<div id="wishlistModal"
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+     background:rgba(0,0,0,0.5); z-index:999;">
 
+    <div style="background:white; padding:25px; width:320px;
+                margin:120px auto; border-radius:12px; text-align:center;">
+
+        <h3>Create Wishlist</h3>
+
+        <form action="/wishlist/add" method="post">
+            <input
+                    type="text"
+                    name="wishlistName"
+                    placeholder="Enter wishlist name"
+                    required
+                    style="width:100%; padding:8px; margin-top:10px;"
+            />
+
+            <br><br>
+
+            <button type="submit">Create</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+
+    </div>
+</div>
+<script>
+    function openModal() {
+        document.getElementById("wishlistModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("wishlistModal").style.display = "none";
+    }
+</script>
 </body>
 </html>
