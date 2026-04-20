@@ -46,7 +46,7 @@ public class UserController {
     @GetMapping("/newUser")
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
-        return "TEST-LoginForm";
+        return "loginForm";
     }
 
     @PostMapping("/save")

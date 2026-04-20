@@ -72,3 +72,43 @@
 .btn-outline:hover {
     background: rgba(90, 122, 92, 0.06);
 }
+
+     /* Subtle green tick shown after valid input */
+ .login-form input:valid:not(:placeholder-shown) {
+     border-color: var(--sage);
+     background: rgba(90, 122, 92, 0.04);
+ }
+
+/* Error state */
+.login-form input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #c0392b;
+}
+
+/* Small helper text under the card */
+.form-footer {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.form-footer a {
+    color: var(--sage);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.form-footer a:hover {
+    color: var(--moss);
+}
+
+/* Section divider label */
+.field-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    margin-bottom: -0.25rem;
+}
