@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class WishlistRepository {
 
     public List<Wishlist> findAllWishlists() {
         String sql = """
-            SELECT
+            
+                SELECT
                 wl.wishlist_id,
                 wl.wishlist_name,
                 w.wish_id,
@@ -104,49 +106,55 @@ public class WishlistRepository {
         return new Wishlist(key.intValue(), wishlist.getWishlistName());
     }
 
-    public Wishlist findWishlistById(int id) {
+    public List<Wishlist> findWishlistsByUserId(int id) {
         String sql = """
-            SELECT
-                wl.wishlist_id,
-                wl.wishlist_name,
-                w.wish_id,
-                w.wish_name,
-                w.wish_description,
-                w.wish_link,
-                w.wish_price
-                            FROM wishlist wl
-                            LEFT
-                JOIN wish w
-                ON wl.
-                    wishlist_id = w.wishlist_id
-                WHERE wl.wishlist_id = ?
-            """;
+        SELECT
+            wl.wishlist_id    AS wl_id,
+            wl.wishlist_name,
+            w.wish_id,
+            w.wish_name,
+            w.wish_description,
+            w.wish_link,
+            w.wish_price,
+            w.wishlist_id     AS w_wishlist_id
+        FROM wishlist wl
+        LEFT JOIN wish w
+            ON wl.wishlist_id = w.wishlist_id
+        WHERE wl.user_id = ?
+        """;
 
         return jdbcTemplate.query(sql, rs -> {
-            Wishlist wishlist = null;
+            Map<Integer, Wishlist> map = new HashMap<>();
 
             while (rs.next()) {
+                int wishlistId = rs.getInt("wl_id");
+
+                Wishlist wishlist = map.get(wishlistId);
+
                 if (wishlist == null) {
                     wishlist = new Wishlist(
-                            rs.getInt("wishlist_id"),
+                            wishlistId,
                             rs.getString("wishlist_name")
                     );
+                    map.put(wishlistId, wishlist);
                 }
 
                 int wishId = rs.getInt("wish_id");
+
                 if (!rs.wasNull()) {
-                    wishlist.addWish(new Wish(
+                    Wish wish = new Wish(
                             wishId,
                             rs.getString("wish_name"),
                             rs.getString("wish_description"),
                             rs.getString("wish_link"),
                             rs.getDouble("wish_price"),
-                            rs.getInt("wishlist_id")
-                    ));
+                            rs.getInt("w_wishlist_id")
+                    );
+                    wishlist.addWish(wish);
                 }
             }
 
-            return wishlist;
+            return new ArrayList<>(map.values());
         }, id);
     }
 

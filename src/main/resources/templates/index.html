@@ -11,7 +11,6 @@
                     </head>
                     <body>
 
-                    <!-- ─── NAVBAR ─── -->
                     <nav id="navbar">
                         <a href="" class="logo" title="Back to home">
       <span class="logo-icon">
@@ -35,7 +34,6 @@
                         </ul>
                     </nav>
 
-                    <!-- ─── HERO ─── -->
                     <section class="hero">
                         <div class="hero-inner">
                             <div class="hero-content">
@@ -79,7 +77,6 @@
                         </div>
                     </section>
 
-                    <!-- ─── HOW IT WORKS ─── -->
                     <section class="how" id="how">
                         <div class="section-inner">
                             <div class="section-header reveal">
@@ -106,7 +103,6 @@
                         </div>
                     </section>
 
-                    <!-- ─── FEATURES ─── -->
                     <section class="features" id="features">
                         <div class="section-inner">
                             <div class="section-header reveal">
@@ -148,7 +144,6 @@
                         </div>
                     </section>
 
-                    <!-- ─── ABOUT ─── -->
                     <section class="about" id="about">
                         <div class="about-inner">
                             <div>
@@ -178,7 +173,6 @@
                         </div>
                     </section>
 
-                    <!-- ─── FOOTER ─── -->
                     <footer>
                         <a href="index.html" class="logo">
       <span class="logo-icon">
@@ -197,13 +191,11 @@
                     </footer>
 
                     <script>
-                        // Scroll shadow on nav
                         const nav = document.getElementById('navbar');
                         window.addEventListener('scroll', () => {
                             nav.classList.toggle('scrolled', window.scrollY > 10);
                         });
 
-                        // Reveal on scroll
                         const reveals = document.querySelectorAll('.reveal');
                         const io = new IntersectionObserver((entries) => {
                             entries.forEach(e => {

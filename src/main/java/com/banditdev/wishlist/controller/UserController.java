@@ -21,8 +21,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "login";
+        }
+        return "redirect:/wishlist";
     }
 
     @PostMapping("/authenticateLogin")
@@ -42,6 +45,19 @@ public class UserController {
         session.invalidate();
         return "index";
     }
+
+    @GetMapping("/newUser")
+    public String createNewUser(Model model) {
+        model.addAttribute("user", new User());
+        return "createAccount";
+    }
+
+    @PostMapping("/save")
+    public String saveNewUser(@ModelAttribute User user) {
+        userService.addUser(user);
+        return "redirect:/wishlist";
+    }
+
 
 
     @GetMapping("/profile")

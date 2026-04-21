@@ -23,8 +23,9 @@ public class WishlistService {
         wishlistRepository.updateWishlist(wishlist);
     }
 
-    public Wishlist findWishlistById(int id) {
-        return wishlistRepository.findWishlistById(id);
+    public List<Wishlist> findWishlistsByUserId(int id) {
+
+        return wishlistRepository.findWishlistsByUserId(id);
     }
 
     public Wishlist addWishlist(Wishlist wishlist, int userId) {

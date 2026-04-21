@@ -9,7 +9,7 @@ public class User {
     private String userEmail;
     private String userName;
     private String userPassword;
-    private List<Wishlist> wishlists;
+    private List<Wishlist> wishlists = new ArrayList<>();
 
 
     public User() {
@@ -20,7 +20,6 @@ public class User {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
-        this.wishlists = new ArrayList<>();
     }
 
     public int getUserId() {
