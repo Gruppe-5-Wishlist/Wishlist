@@ -18,6 +18,9 @@ public class Wish {
         this.wishlistId = wishlistId;
     }
 
+    public Wish() {
+    }
+
     public int getWishId() {
         return wishId;
     }
