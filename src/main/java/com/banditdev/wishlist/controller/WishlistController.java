@@ -41,8 +41,12 @@ public class WishlistController {
         }
 
         Wishlist wishlist = wishlistService.findWishlistById(id);
-        model.addAttribute("wishlist", wishlist);
 
+        if (wishlist == null) {
+            return "redirect:/wishlist";
+        }
+
+        model.addAttribute("wishlist", wishlist);
         return "wish";
     }
 

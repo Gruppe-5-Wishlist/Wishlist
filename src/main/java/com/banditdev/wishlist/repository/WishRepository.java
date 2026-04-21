@@ -90,29 +90,28 @@ public class WishRepository {
 
     public Wish findWishById(int idToFind) {
         String sql = """
-                
-                        SELECT
-                    wish_id,
-                    wish_name,
-                    wish_description,
-                    wish_link,
-                    wish_price
-                FROM wish
-                WHERE wish_id = ?
-                """;
+            SELECT
+                wish_id,
+                wish_name,
+                wish_description,
+                wish_link,
+                wish_price,
+                wishlist_id
+            FROM wish
+            WHERE wish_id = ?
+            """;
 
-        return
-                jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                                new Wish(
-                                        rs.getInt("wish_id"),
-                                        rs.getString("wish_name"),
-                                        rs.getString("wish_description"),
-                                        rs.getString("wish_link"),
-                                        rs.getDouble("wish_price"),
-                                        rs.getInt("wishlist_id")
-                                ),
-                        idToFind
-                );
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                        new Wish(
+                                rs.getInt("wish_id"),
+                                rs.getString("wish_name"),
+                                rs.getString("wish_description"),
+                                rs.getString("wish_link"),
+                                rs.getDouble("wish_price"),
+                                rs.getInt("wishlist_id")
+                        ),
+                idToFind
+        );
     }
 
 
