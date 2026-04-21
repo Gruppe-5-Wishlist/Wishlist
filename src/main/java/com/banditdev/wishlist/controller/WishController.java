@@ -43,4 +43,11 @@ public class WishController {
         wishService.updateWish(wish);
         return "redirect:/wishlist/" + wish.getWishlistId();
     }
+
+    @GetMapping("/edit/{wishId}")
+    public String editWish(@PathVariable int wishId, Model model) {
+        Wish wish = wishService.findWishById(wishId);
+        model.addAttribute("wish", wish);
+        return "editWish";
+    }
 }
