@@ -254,10 +254,26 @@
     color: var(--moss);
 }
 
-.icon-btn.delete:hover {
-    background: rgba(192, 57, 43, 0.07);
-    border-color: rgba(192, 57, 43, 0.25);
+/* ─── DELETE WISHLIST BUTTON ─── */
+.btn-delete-wishlist {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
     color: #c0392b;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.6rem 1.3rem;
+    border-radius: 999px;
+    border: 1.5px solid rgba(192, 57, 43, 0.25);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-delete-wishlist:hover {
+    border-color: #c0392b;
+    background: rgba(192, 57, 43, 0.07);
 }
 
 .wish-desc {
