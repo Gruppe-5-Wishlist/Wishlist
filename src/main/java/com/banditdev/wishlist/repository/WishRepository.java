@@ -1,6 +1,7 @@
 package com.banditdev.wishlist.repository;
 
 import com.banditdev.wishlist.model.Wish;
+import com.banditdev.wishlist.model.Wishlist;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class WishRepository {
@@ -130,6 +134,34 @@ public class WishRepository {
                 wish.getWishPrice(),
                 wish.getWishId()
         );
+    }
+
+    public List<Wish> findWishesByUserId(int userId) {
+
+        String sql = """
+        SELECT
+            w.wish_id,
+            w.wish_name,
+            w.wish_description,
+            w.wish_link,
+            w.wish_price,
+            w.wishlist_id
+        FROM wish w
+        JOIN wishlist wl ON w.wishlist_id = wl.wishlist_id
+        WHERE wl.user_id = ?
+        ORDER BY w.wish_id
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                        new Wish(
+                                rs.getInt("wish_id"),
+                                rs.getString("wish_name"),
+                                rs.getString("wish_description"),
+                                rs.getString("wish_link"),
+                                rs.getDouble("wish_price"),
+                                rs.getInt("wishlist_id")
+                        )
+                , userId);
     }
 
 }

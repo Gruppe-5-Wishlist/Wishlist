@@ -1,5 +1,6 @@
 package com.banditdev.wishlist.service;
 
+import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.model.Wishlist;
 import com.banditdev.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,10 @@ public class WishlistService {
 
     public void deleteWishlistById(int id) {
         wishlistRepository.deleteWishlistById(id);
+    }
+
+    public boolean validateWishlistOwner(User user, int wishlistId) {
+        return wishlistRepository.findWishlistsByUserId(user.getUserId())
+                .stream().anyMatch(wishlist -> wishlist.getWishlistId() == wishlistId);
     }
 }

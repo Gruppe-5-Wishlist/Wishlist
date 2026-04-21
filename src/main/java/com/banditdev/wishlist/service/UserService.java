@@ -39,4 +39,3 @@ public class UserService {
         return user != null && user.getUserPassword().equals(userPassword);
     }
 }
-//TODO - Make a login() validation method with if statement - needs review
