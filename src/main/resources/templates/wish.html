@@ -74,12 +74,12 @@
             </div>
         </div>
         <div class="header-actions">
-            <button class="btn-add-wish" onclick="openAddModal()">
+            <a class="btn-add-wish" th:href="@{'/wish/add/' + ${wishlist.wishlistId}}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <path d="M12 5v14M5 12h14"/>
                 </svg>
                 Add wish
-            </button>
+            </a>
         </div>
     </div>
 
@@ -149,131 +149,5 @@
     </div>
 
 </main>
-
-
-<!-- ─── ADD WISH MODAL ─── -->
-<div id="addModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'addModal')">
-    <div class="modal">
-        <h2 class="modal-title">Add a wish</h2>
-
-        <form th:action="@{'/wish/add/' + ${wishlist.wishlistId}}" method="post" class="modal-form">
-            <span class="field-label">Item</span>
-            <input type="text" name="wishName" placeholder="What do you wish for?" required autocomplete="off" />
-
-            <span class="field-label">Description</span>
-            <textarea name="wishDescription" placeholder="Size, colour, notes…" rows="3"></textarea>
-
-            <span class="field-label">Link</span>
-            <input type="url" name="wishLink" placeholder="https://shop.example.com/item" />
-
-            <span class="field-label">Price (kr.)</span>
-            <input type="number" name="wishPrice" placeholder="0.00" step="0.01" min="0" />
-
-            <div class="modal-actions">
-                <button type="submit" class="btn-modal-submit">
-                    Add wish
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-                <button type="button" class="btn-modal-cancel" onclick="closeModal('addModal')">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<!-- ─── EDIT WISH MODAL ─── -->
-<div id="editModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'editModal')">
-    <div class="modal">
-        <h2 class="modal-title">Edit wish</h2>
-
-        <form id="editForm" method="post" class="modal-form">
-            <input type="hidden" id="editWishId" name="wishId" />
-
-            <span class="field-label">Item</span>
-            <input type="text" id="editName" name="wishName" placeholder="What do you wish for?" required />
-
-            <span class="field-label">Description</span>
-            <textarea id="editDescription" name="wishDescription" placeholder="Size, colour, notes…" rows="3"></textarea>
-
-            <span class="field-label">Link</span>
-            <input type="url" id="editLink" name="wishLink" placeholder="https://shop.example.com/item" />
-
-            <span class="field-label">Price (kr.)</span>
-            <input type="number" id="editPrice" name="wishPrice" placeholder="0.00" step="0.01" min="0" />
-
-            <div class="modal-actions">
-                <button type="submit" class="btn-modal-submit">
-                    Save changes
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-                <button type="button" class="btn-modal-cancel" onclick="closeModal('editModal')">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- ─── RENAME WISHLIST MODAL ─── -->
-<div id="renameModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'renameModal')">
-    <div class="modal">
-        <h2 class="modal-title">Rename wishlist</h2>
-
-        <form th:action="@{'/wishlist/' + ${wishlist.wishlistId} + '/edit'}" method="post" class="modal-form">
-            <span class="field-label">Wishlist name</span>
-            <input type="text" name="wishlistName" th:value="${wishlist.wishlistName}" required autocomplete="off" />
-
-            <div class="modal-actions">
-                <button type="submit" class="btn-modal-submit">
-                    Save name
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-                <button type="button" class="btn-modal-cancel" onclick="closeModal('renameModal')">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    /* Nav shadow on scroll */
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
-    });
-
-    /* Scroll reveal */
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => io.observe(el));
-
-    /* Modal helpers */
-    function openModal(id) {
-        document.getElementById(id).classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    function closeOnBackdrop(event, id) {
-        if (event.target === document.getElementById(id)) closeModal(id);
-    }
-
-    function openAddModal() { openModal('addModal'); }
-
-    function openEditModal(wishId, wishName, wishDescription, wishLink, wishPrice) {
-        document.getElementById('editWishId').value = wishId;
-        document.getElementById('editName').value = wishName;
-        document.getElementById('editDescription').value = wishDescription === 'null' ? '' : wishDescription;
-        document.getElementById('editLink').value = wishLink === 'null' ? '' : wishLink;
-        document.getElementById('editPrice').value = wishPrice;
-        document.getElementById('editForm').action = '/wish/update/' + wishId;
-        openModal('editModal');
-    }
-</script>
-
 </body>
 </html>
