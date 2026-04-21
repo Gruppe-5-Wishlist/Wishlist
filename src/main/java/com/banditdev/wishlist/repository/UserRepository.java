@@ -1,6 +1,7 @@
 package com.banditdev.wishlist.repository;
 
 import com.banditdev.wishlist.model.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -61,16 +62,20 @@ public class UserRepository {
                 WHERE LOWER(user_email) = LOWER(?)
                 """;
 
-        return
-                jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                                new User(
-                                        rs.getInt("user_id"),
-                                        rs.getString("user_email"),
-                                        rs.getString("user_name"),
-                                        rs.getString("user_password")
-                                ),
-                        userEmail
-                );
+        try {
+            return
+                    jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                                    new User(
+                                            rs.getInt("user_id"),
+                                            rs.getString("user_email"),
+                                            rs.getString("user_name"),
+                                            rs.getString("user_password")
+                                    ),
+                            userEmail
+                    );
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public User findUserById (int id) {
@@ -95,7 +100,6 @@ public class UserRepository {
                     id
             );
     }
-
 
 
 
