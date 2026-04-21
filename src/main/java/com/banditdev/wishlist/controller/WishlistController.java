@@ -6,10 +6,7 @@ import com.banditdev.wishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,18 @@ public class WishlistController {
         return "wishlist";
     }
 
+    @GetMapping("/{id}")
+    public String viewWishlist(@PathVariable int id, HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/user/login";
+        }
+
+        Wishlist wishlist = wishlistService.findWishlistById(id);
+        model.addAttribute("wishlist", wishlist);
+
+        return "wish";
+    }
+
     @PostMapping("/add")
     public String addWishlist(@RequestParam String wishlistName,
                               HttpSession session) {
@@ -49,5 +58,26 @@ public class WishlistController {
         wishlistService.addWishlist(wishlist, currentUser.getUserId());
 
         return "redirect:/wishlist";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteWishlist(@PathVariable int id) {
+        wishlistService.deleteWishlistById(id);
+        return "redirect:/wishlist";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editWishlistForm(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/user/login";
+        model.addAttribute("wishlist", wishlistService.findWishlistById(id));
+        return "editWishlist";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editWishlist(@PathVariable int id, @RequestParam String wishlistName) {
+        Wishlist wishlist = wishlistService.findWishlistById(id);
+        wishlist.setWishlistName(wishlistName);
+        wishlistService.updateWishlist(wishlist);
+        return "redirect:/wishlist/" + id;
     }
 }
