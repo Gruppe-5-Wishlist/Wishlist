@@ -42,27 +42,6 @@
             margin-bottom: -4px;
         }
 
-        .btn-logout {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: transparent;
-            color: var(--muted) !important;
-            border: 1.5px solid rgba(90, 122, 92, 0.25);
-            padding: 0.45rem 1rem !important;
-            border-radius: 999px !important;
-            font-size: 0.875rem !important;
-            font-weight: 500 !important;
-            text-decoration: none;
-            transition: border-color 0.2s, color 0.2s, background 0.2s !important;
-        }
-
-        .btn-logout:hover {
-            border-color: var(--sage) !important;
-            color: var(--moss) !important;
-            background: rgba(90, 122, 92, 0.07) !important;
-        }
-
         /* ─── PAGE LAYOUT ─── */
         .wishlist-wrapper {
             min-height: 100vh;
@@ -218,14 +197,7 @@
                 </svg>
             </a>
         </li>
-        <li>
-            <a th:href="@{/user/logout}" class="btn-logout">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
-                </svg>
-                Log out
-            </a>
-        </li>
+        <li><a th:href="@{/user/logout}">Log out</a></li>
     </ul>
 </nav>
 
