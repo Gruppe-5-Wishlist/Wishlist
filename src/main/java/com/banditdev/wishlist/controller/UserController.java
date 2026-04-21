@@ -5,10 +5,7 @@ import com.banditdev.wishlist.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("user")
@@ -45,4 +42,26 @@ public class UserController {
         session.invalidate();
         return "index";
     }
+
+
+    @GetMapping("/profile")
+    public String editProfile(HttpSession session, Model model) {
+
+        if (isLoggedIn(session) == true) {
+            User currentUser = (User) session.getAttribute("user");
+            model.addAttribute("user", currentUser);
+            return "editProfile";
+        } else {
+            session.invalidate();
+            return "index";
+        }
+    }
+
+    @PostMapping("/saveProfile")
+    public String saveProfile(@ModelAttribute User user) {
+        userService.updateUser(user);
+        return "redirect:/profile";
+    }
+
+
 }
