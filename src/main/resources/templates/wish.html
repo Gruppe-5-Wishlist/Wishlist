@@ -1,10 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${wishlist.wishlistName} + ' — EcoWish'">Wishlist — EcoWish</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/wish.css}" />
 </head>
+
 <body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+    <a th:href="@{/wishlist}" class="logo">
+        <span class="logo-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
+            </svg>
+        </span>
+        <span class="logo-text">EcoWish</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a th:href="@{/wishlist}">My wishlists</a></li>
+        <li><a th:href="@{/user/logout}" class="btn-login">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+            </svg>
+            Log out
+        </a></li>
+    </ul>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="wish-wrapper">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a th:href="@{/wishlist}">My wishlists</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current" th:text="${wishlist.wishlistName}">Wishlist name</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="wish-page-header">
+        <div>
+            <h1 class="wish-page-title" th:text="${wishlist.wishlistName}">Wishlist name</h1>
+            <div class="wish-count-badge">
+                <span>🌿</span>
+                <span th:text="${wishlist.wishes.size()} + ' wishes'">0 wishes</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn-add-wish" onclick="openAddModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                Add wish
+            </button>
+        </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="wish-empty" th:if="${wishlist.wishes == null or wishlist.wishes.isEmpty()}">
+        <span class="wish-empty-icon">✨</span>
+        <p>This wishlist is empty.<br>Add your first wish to get started!</p>
+    </div>
+
+    <!-- Wish grid -->
+    <div class="wish-grid" th:if="${wishlist.wishes != null and !wishlist.wishes.isEmpty()}">
+        <div class="wish-card reveal" th:each="wish : ${wishlist.wishes}">
+
+            <div class="wish-card-header">
+                <div class="wish-name" th:text="${wish.wishName}">Wish name</div>
+                <div class="wish-card-actions">
+                    <!-- Edit -->
+                    <button class="icon-btn"
+                            th:onclick="'openEditModal(' + ${wish.wishId} + ', \'' + ${wish.wishName} + '\', \'' + ${wish.wishDescription} + '\', \'' + ${wish.wishLink} + '\', ' + ${wish.wishPrice} + ')'"
+                            title="Edit wish">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </button>
+                    <!-- Delete -->
+                    <form th:action="@{'/wish/delete/' + ${wish.wishId}}" method="post" style="margin:0">
+                        <button type="submit" class="icon-btn delete" title="Delete wish">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <p class="wish-desc" th:if="${wish.wishDescription != null and !wish.wishDescription.isEmpty()}"
+               th:text="${wish.wishDescription}">Description</p>
+            <p class="no-value" th:if="${wish.wishDescription == null or wish.wishDescription.isEmpty()}">No description</p>
+
+            <!-- Price -->
+            <div class="wish-price"
+                 th:if="${wish.wishPrice != null and wish.wishPrice > 0}"
+                 th:text="${#numbers.formatDecimal(wish.wishPrice, 1, 'COMMA', 2, 'POINT') + ' kr.'}">0.00 kr.</div>
+            <div class="no-value" th:if="${wish.wishPrice == null or wish.wishPrice <= 0}">No price set</div>
+
+            <!-- Link -->
+            <a class="wish-link"
+               th:if="${wish.wishLink != null and !wish.wishLink.isEmpty()}"
+               th:href="${wish.wishLink}"
+               target="_blank"
+               rel="noopener noreferrer">
+                View item
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+            </a>
+
+        </div>
+    </div>
+
+</main>
+
+
+<!-- ─── ADD WISH MODAL ─── -->
+<div id="addModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'addModal')">
+    <div class="modal">
+        <h2 class="modal-title">Add a wish</h2>
+
+        <form th:action="@{'/wish/add/' + ${wishlist.wishlistId}}" method="post" class="modal-form">
+            <span class="field-label">Item</span>
+            <input type="text" name="wishName" placeholder="What do you wish for?" required autocomplete="off" />
+
+            <span class="field-label">Description</span>
+            <textarea name="wishDescription" placeholder="Size, colour, notes…" rows="3"></textarea>
+
+            <span class="field-label">Link</span>
+            <input type="url" name="wishLink" placeholder="https://shop.example.com/item" />
+
+            <span class="field-label">Price (kr.)</span>
+            <input type="number" name="wishPrice" placeholder="0.00" step="0.01" min="0" />
+
+            <div class="modal-actions">
+                <button type="submit" class="btn-modal-submit">
+                    Add wish
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button type="button" class="btn-modal-cancel" onclick="closeModal('addModal')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- ─── EDIT WISH MODAL ─── -->
+<div id="editModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'editModal')">
+    <div class="modal">
+        <h2 class="modal-title">Edit wish</h2>
+
+        <form id="editForm" method="post" class="modal-form">
+            <input type="hidden" id="editWishId" name="wishId" />
+
+            <span class="field-label">Item</span>
+            <input type="text" id="editName" name="wishName" placeholder="What do you wish for?" required />
+
+            <span class="field-label">Description</span>
+            <textarea id="editDescription" name="wishDescription" placeholder="Size, colour, notes…" rows="3"></textarea>
+
+            <span class="field-label">Link</span>
+            <input type="url" id="editLink" name="wishLink" placeholder="https://shop.example.com/item" />
+
+            <span class="field-label">Price (kr.)</span>
+            <input type="number" id="editPrice" name="wishPrice" placeholder="0.00" step="0.01" min="0" />
+
+            <div class="modal-actions">
+                <button type="submit" class="btn-modal-submit">
+                    Save changes
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button type="button" class="btn-modal-cancel" onclick="closeModal('editModal')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    /* Nav shadow on scroll */
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    /* Scroll reveal */
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+
+    /* Modal helpers */
+    function openModal(id) {
+        document.getElementById(id).classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function closeOnBackdrop(event, id) {
+        if (event.target === document.getElementById(id)) closeModal(id);
+    }
+
+    function openAddModal() { openModal('addModal'); }
+
+    function openEditModal(wishId, wishName, wishDescription, wishLink, wishPrice) {
+        document.getElementById('editWishId').value = wishId;
+        document.getElementById('editName').value = wishName;
+        document.getElementById('editDescription').value = wishDescription === 'null' ? '' : wishDescription;
+        document.getElementById('editLink').value = wishLink === 'null' ? '' : wishLink;
+        document.getElementById('editPrice').value = wishPrice;
+        document.getElementById('editForm').action = '/wish/update/' + wishId;
+        openModal('editModal');
+    }
+</script>
 
 </body>
 </html>

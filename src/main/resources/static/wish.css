@@ -1,0 +1,391 @@
+/* ─── PAGE WRAPPER ─── */
+.wish-wrapper {
+    min-height: 100vh;
+    padding: 100px 2.5rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover { color: var(--sage); }
+
+.breadcrumb-sep {
+    color: rgba(90, 122, 92, 0.35);
+    font-size: 0.9rem;
+}
+
+.breadcrumb-current {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* ─── PAGE HEADER ─── */
+.wish-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.wish-page-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.1;
+}
+
+.wish-page-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage);
+}
+
+.wish-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(163, 196, 126, 0.2);
+    color: var(--sage-dk);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(90, 122, 92, 0.18);
+    margin-top: 0.5rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* ─── ADD WISH BUTTON ─── */
+.btn-add-wish {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--moss);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.6rem 1.3rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(46, 74, 47, 0.22);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    text-decoration: none;
+}
+
+.btn-add-wish:hover {
+    background: var(--sage-dk);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(46, 74, 47, 0.28);
+}
+
+/* ─── EMPTY STATE ─── */
+.wish-empty {
+    padding: 5rem 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.wish-empty-icon {
+    font-size: 3rem;
+    opacity: 0.45;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.wish-empty p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ─── WISH GRID ─── */
+.wish-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+/* ─── WISH CARD ─── */
+.wish-card {
+    background: var(--white);
+    border: 1px solid rgba(90, 122, 92, 0.13);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 4px 18px rgba(46, 74, 47, 0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.wish-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--sage-lt), var(--leaf));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.wish-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(46, 74, 47, 0.12);
+}
+
+.wish-card:hover::before { opacity: 1; }
+
+.wish-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.wish-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.25;
+}
+
+.wish-card-actions {
+    display: flex;
+    gap: 0.3rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.wish-card:hover .wish-card-actions { opacity: 1; }
+
+.icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(90, 122, 92, 0.18);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.icon-btn:hover {
+    background: rgba(90, 122, 92, 0.08);
+    border-color: var(--sage-lt);
+    color: var(--moss);
+}
+
+.icon-btn.delete:hover {
+    background: rgba(192, 57, 43, 0.07);
+    border-color: rgba(192, 57, 43, 0.25);
+    color: #c0392b;
+}
+
+.wish-desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.wish-price {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--moss);
+}
+
+.wish-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    color: var(--sage);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    margin-top: auto;
+}
+
+.wish-link:hover { color: var(--moss); }
+
+.wish-link svg {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+}
+
+.no-value {
+    font-size: 0.78rem;
+    color: rgba(107, 122, 108, 0.45);
+    font-style: italic;
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 43, 31, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem 2.25rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 24px 64px rgba(46, 74, 47, 0.2);
+    animation: modalIn 0.25s ease both;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.field-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: -0.4rem;
+}
+
+.modal-form input,
+.modal-form textarea {
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(90, 122, 92, 0.2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border 0.2s, box-shadow 0.2s;
+    width: 100%;
+    resize: vertical;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus {
+    outline: none;
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(90, 122, 92, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.btn-modal-submit {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: var(--moss);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-modal-submit:hover {
+    background: var(--sage-dk);
+    transform: translateY(-1px);
+}
+
+.btn-modal-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1.5px solid rgba(46, 74, 47, 0.2);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-modal-cancel:hover {
+    border-color: var(--sage-lt);
+    background: rgba(90, 122, 92, 0.05);
+    color: var(--moss);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+    .wish-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+    .wish-wrapper { padding: 90px 1.2rem 4rem; }
+    .wish-grid { grid-template-columns: 1fr; }
+    .wish-card-actions { opacity: 1; }
+}
