@@ -35,8 +35,7 @@ public class UserController {
             session.setAttribute("user", userService.findUserByEmail(userEmail));
             return "redirect:/wishlist";
         } else {
-            model.addAttribute("wrongCredentials", true);
-            return "redirect:/login";
+            return "redirect:/user/login";
         }
     }
 
@@ -73,8 +72,9 @@ public class UserController {
     }
 
     @PostMapping("/profile/save")
-    public String saveProfile(@ModelAttribute User user) {
+    public String saveProfile(@ModelAttribute User user, HttpSession session) {
         userService.updateUser(user);
+        session.setAttribute("user", user);
         return "redirect:/user/profile";
     }
 
