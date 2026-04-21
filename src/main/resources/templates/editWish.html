@@ -49,6 +49,8 @@
 
     <form th:action="@{'/wish/update/' + ${wish.wishId}}" method="post" class="modal-form">
 
+        <input type="hidden" name="wishlistId" th:value="${wish.wishlistId}" />
+
         <span class="field-label">Item</span>
         <input type="text"
                name="wishName"
