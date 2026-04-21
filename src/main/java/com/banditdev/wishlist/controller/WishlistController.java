@@ -59,4 +59,19 @@ public class WishlistController {
 
         return "redirect:/wishlist";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editWishlistForm(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/user/login";
+        model.addAttribute("wishlist", wishlistService.findWishlistById(id));
+        return "editWishlist";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editWishlist(@PathVariable int id, @RequestParam String wishlistName) {
+        Wishlist wishlist = wishlistService.findWishlistById(id);
+        wishlist.setWishlistName(wishlistName);
+        wishlistService.updateWishlist(wishlist);
+        return "redirect:/wishlist/" + id;
+    }
 }

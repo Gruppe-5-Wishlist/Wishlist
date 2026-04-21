@@ -57,6 +57,13 @@
             </div>
         </div>
         <div class="header-actions">
+            <button class="btn-rename-wishlist" onclick="openModal('renameModal')" title="Rename wishlist">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Rename
+            </button>
             <button class="btn-add-wish" onclick="openAddModal()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <path d="M12 5v14M5 12h14"/>
@@ -194,7 +201,25 @@
         </form>
     </div>
 </div>
+<!-- ─── RENAME WISHLIST MODAL ─── -->
+<div id="renameModal" class="modal-overlay" onclick="closeOnBackdrop(event, 'renameModal')">
+    <div class="modal">
+        <h2 class="modal-title">Rename wishlist</h2>
 
+        <form th:action="@{'/wishlist/' + ${wishlist.wishlistId} + '/edit'}" method="post" class="modal-form">
+            <span class="field-label">Wishlist name</span>
+            <input type="text" name="wishlistName" th:value="${wishlist.wishlistName}" required autocomplete="off" />
+
+            <div class="modal-actions">
+                <button type="submit" class="btn-modal-submit">
+                    Save name
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button type="button" class="btn-modal-cancel" onclick="closeModal('renameModal')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
     /* Nav shadow on scroll */
