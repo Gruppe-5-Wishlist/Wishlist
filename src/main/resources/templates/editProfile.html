@@ -12,6 +12,205 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
     <link rel="stylesheet" th:href="@{/login.css}" />
 
+    <style>
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: rgba(90, 122, 92, 0.12);
+            margin: 0.25rem 0 1rem;
+        }
+
+        /* ── Password eye toggle ── */
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding-right: 2.75rem;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .toggle-pw:hover { color: var(--sage); }
+
+        /* ── Danger zone ── */
+        .danger-zone {
+            margin-top: 1.75rem;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(192, 57, 43, 0.2);
+            background: rgba(192, 57, 43, 0.04);
+        }
+
+        .danger-zone-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #c0392b;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-danger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 0.65rem 1.2rem;
+            border-radius: 999px;
+            border: 1.5px solid rgba(192, 57, 43, 0.35);
+            background: transparent;
+            color: #c0392b;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-danger:hover {
+            background: rgba(192, 57, 43, 0.08);
+            border-color: #c0392b;
+        }
+
+        /* ── Confirmation modal ── */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(30, 43, 31, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 380px;
+            margin: 1rem;
+            box-shadow: 0 24px 60px rgba(30, 43, 31, 0.18);
+        }
+
+        .modal-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .modal-desc strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            border: 1.5px solid rgba(192, 57, 43, 0.25);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #c0392b;
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 0.65rem;
+            border-radius: 999px;
+            border: 1.5px solid rgba(46, 74, 47, 0.25);
+            background: transparent;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn-modal-cancel:hover {
+            background: rgba(90, 122, 92, 0.06);
+            border-color: var(--sage);
+            color: var(--moss);
+        }
+
+        .btn-modal-confirm {
+            flex: 1;
+            padding: 0.65rem;
+            border-radius: 999px;
+            border: none;
+            background: #c0392b;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, opacity 0.2s;
+            opacity: 0.4;
+            pointer-events: none;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-modal-confirm.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-modal-confirm.active:hover {
+            background: #a93226;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -35,15 +234,9 @@
 <main class="login-wrapper">
     <div class="login-card">
 
-        <!-- Avatar with initial -->
-        <div class="profile-avatar" th:text="${#strings.toUpperCase(#strings.substring(user.userName, 0, 1))}">A</div>
-
         <h2 class="login-title">Edit Profile</h2>
-        <p class="profile-subtitle" th:text="${user.userName}">Your name</p>
+        <form th:object="${user}" th:action="@{/user/profile/save}" th:method="post" class="login-form">
 
-        <form th:object="${user}" th:action="@{/user/saveProfile}" th:method="post" class="login-form">
-
-            <!-- Hidden field to preserve userId -->
             <input type="hidden" th:field="*{userId}" />
 
             <span class="field-label">Personal details</span>
@@ -65,7 +258,7 @@
             />
 
             <div class="divider"></div>
-            <span class="field-label">Security</span>
+            <span class="field-label">Change password</span>
 
             <div class="input-wrapper">
                 <input
@@ -101,7 +294,7 @@
 
         <div class="danger-zone">
             <span class="danger-zone-label">Danger zone</span>
-            <a th:href="@{/user/delete}" class="btn-danger">
+            <button type="button" class="btn-danger" onclick="openDeleteModal()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"/>
                     <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
@@ -109,15 +302,38 @@
                     <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
                 </svg>
                 Delete account
-            </a>
+            </button>
         </div>
-
-        <p class="form-footer">
-            <a th:href="@{/wishlist}">← Back to my wishlists</a>
-        </p>
 
     </div>
 </main>
+
+<!-- Delete confirmation modal -->
+<div class="modal-backdrop" id="deleteModal">
+    <div class="modal">
+        <p class="modal-title">Delete your account?</p>
+        <p class="modal-desc">
+            This will permanently delete your account and all your wishlists. This action <strong>cannot be undone</strong>.<br><br>
+            Type <strong>DELETE</strong> below to confirm.
+        </p>
+        <input
+                type="text"
+                class="modal-input"
+                id="deleteConfirmInput"
+                placeholder="DELETE"
+                oninput="checkDeleteInput(this)"
+                autocomplete="off"
+        />
+        <div class="modal-actions">
+            <button type="button" class="btn-modal-cancel" onclick="closeDeleteModal()">Cancel</button>
+            <form th:action="@{/user/delete}" th:method="post">
+                <button type="submit" id="confirmDeleteBtn" class="btn-modal-confirm">
+                    Delete account
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
     // Scroll shadow on nav
@@ -143,6 +359,27 @@
                 <circle cx="12" cy="12" r="3"/>`;
         }
     }
+
+    // Delete modal
+    function openDeleteModal() {
+        document.getElementById('deleteModal').classList.add('open');
+        document.getElementById('deleteConfirmInput').value = '';
+        document.getElementById('confirmDeleteBtn').classList.remove('active');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('open');
+    }
+
+    function checkDeleteInput(input) {
+        const btn = document.getElementById('confirmDeleteBtn');
+        btn.classList.toggle('active', input.value === 'DELETE');
+    }
+
+    // Close modal when clicking the backdrop itself
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+        if (e.target === this) closeDeleteModal();
+    });
 </script>
 
 </body>

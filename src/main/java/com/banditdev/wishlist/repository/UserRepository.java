@@ -99,7 +99,6 @@ public class UserRepository {
 
 
 
-//TODO måske skal der være en int for id og evt. en metode som tager int ud fra CurrentUser??
     public void updateUser (User user) {
         String sql = """
                 UPDATE user
