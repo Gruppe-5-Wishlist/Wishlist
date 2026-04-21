@@ -257,28 +257,65 @@
 
 <div id="wishlistModal"
      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-     background:rgba(0,0,0,0.5); z-index:999;">
+     background:rgba(30,43,31,0.45); backdrop-filter:blur(4px); z-index:999;
+     align-items:center; justify-content:center;">
 
-    <div style="background:white; padding:25px; width:320px;
-                margin:120px auto; border-radius:12px; text-align:center;">
+    <div style="background:var(--white); padding:2.5rem; width:100%; max-width:400px;
+                margin:0 auto; border-radius:20px; text-align:left;
+                border:1px solid rgba(90,122,92,0.12);
+                box-shadow:0 20px 60px rgba(46,74,47,0.18);">
 
-        <h3>Create Wishlist</h3>
+        <h3 style="font-family:'Fraunces',serif; font-size:1.5rem; font-weight:500;
+                   color:var(--text); margin-bottom:1.5rem;">
+            New wishlist
+        </h3>
 
-        <form action="/wishlist/add" method="post">
+        <form action="/wishlist/add" method="post"
+              style="display:flex; flex-direction:column; gap:1rem;">
+
             <input
                     type="text"
                     name="wishlistName"
-                    placeholder="Enter wishlist name"
+                    placeholder="Wishlist name"
                     required
-                    style="width:100%; padding:8px; margin-top:10px;"
+                    style="padding:0.75rem 1rem; border-radius:10px;
+                       border:1px solid rgba(90,122,92,0.2);
+                       font-family:'DM Sans',sans-serif; font-size:0.9rem;
+                       transition:border 0.2s, box-shadow 0.2s; outline:none;"
+                    onfocus="this.style.borderColor='var(--sage)'; this.style.boxShadow='0 0 0 2px rgba(90,122,92,0.1)'"
+                    onblur="this.style.borderColor='rgba(90,122,92,0.2)'; this.style.boxShadow='none'"
             />
 
-            <br><br>
+            <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.5rem;">
+                <button type="submit"
+                        style="display:inline-flex; align-items:center; justify-content:center; gap:8px;
+                               background:var(--moss); color:var(--white);
+                               font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:500;
+                               padding:0.8rem 1.8rem; border-radius:999px; border:none; cursor:pointer;
+                               box-shadow:0 4px 20px rgba(46,74,47,0.2);
+                               transition:background 0.2s, transform 0.2s;"
+                        onmouseover="this.style.background='var(--sage-dk)'; this.style.transform='translateY(-1px)'"
+                        onmouseout="this.style.background='var(--moss)'; this.style.transform='none'">
+                    Create wishlist
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
 
-            <button type="submit">Create</button>
-            <button type="button" onclick="closeModal()">Cancel</button>
+                <button type="button" onclick="closeModal()"
+                        style="display:inline-flex; align-items:center; justify-content:center;
+                               background:transparent; color:var(--moss);
+                               font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:400;
+                               padding:0.8rem 1.5rem; border-radius:999px; cursor:pointer;
+                               border:1.5px solid rgba(46,74,47,0.3);
+                               transition:border-color 0.2s, background 0.2s;"
+                        onmouseover="this.style.borderColor='var(--sage)'; this.style.background='rgba(90,122,92,0.06)'"
+                        onmouseout="this.style.borderColor='rgba(46,74,47,0.3)'; this.style.background='transparent'">
+                    Cancel
+                </button>
+            </div>
         </form>
-
     </div>
 </div>
 
