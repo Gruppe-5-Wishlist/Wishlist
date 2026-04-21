@@ -54,7 +54,7 @@ public class WishController {
         User user = (User) session.getAttribute("user");
         if (user == null) return "redirect:/user/login";
 
-        if (!wishlistService.validateWishlistOwner(user, wishlistId)) {
+        if (!wishService.validateWishOwner(user, wishId)) {
             return "redirect:/wishlist";
         }
 
@@ -69,7 +69,7 @@ public class WishController {
 
         int wishlistId = wish.getWishlistId();
 
-        if (!wishlistService.validateWishlistOwner(user, wishlistId)) {
+        if (!wishlistService.validateWishlistOwner(user, wishlistId) || !wishService.validateWishOwner(user, wishId)) {
             return "redirect:/wishlist";
         }
 
@@ -87,7 +87,7 @@ public class WishController {
 
         Wish wish = wishService.findWishById(wishId);
 
-        if (!wishlistService.validateWishlistOwner(user, wish.getWishlistId())) {
+        if (!wishlistService.validateWishlistOwner(user, wish.getWishlistId()) || !wishService.validateWishOwner(user, wishId)) {
             return "redirect:/wishlist";
         }
 
