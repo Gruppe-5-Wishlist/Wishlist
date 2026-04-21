@@ -173,10 +173,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
+    align-items: start;
 }
 
 /* ─── WISH CARD ─── */
-.wish-card {
+.wish-grid .wish-card {
     background: var(--white);
     border: 1px solid rgba(90, 122, 92, 0.13);
     border-radius: 18px;
@@ -188,6 +189,12 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
+
+    bottom: auto;
+    left: auto;
+    width: auto;
+    transform: none;
+    z-index: auto;
 }
 
 .wish-card::before {
