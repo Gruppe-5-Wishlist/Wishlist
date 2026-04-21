@@ -60,6 +60,12 @@ public class WishlistController {
         return "redirect:/wishlist";
     }
 
+    @PostMapping("/delete/{id}")
+    public String deleteWishlist(@PathVariable int id) {
+        wishlistService.deleteWishlistById(id);
+        return "redirect:/wishlist";
+    }
+
     @GetMapping("/{id}/edit")
     public String editWishlistForm(@PathVariable int id, Model model, HttpSession session) {
         if (session.getAttribute("user") == null) return "redirect:/user/login";

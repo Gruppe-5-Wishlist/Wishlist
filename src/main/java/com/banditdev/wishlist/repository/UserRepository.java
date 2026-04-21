@@ -99,7 +99,6 @@ public class UserRepository {
 
 
 
-
     public void updateUser (User user) {
         String sql = """
                 UPDATE user
