@@ -75,6 +75,47 @@ public class WishlistRepository {
         });
     }
 
+    public Wishlist findWishlistById(int id) {
+        String sql = """
+                SELECT
+                    wl.wishlist_id    AS wl_id,
+                    wl.wishlist_name,
+                    w.wish_id,
+                    w.wish_name,
+                    w.wish_description,
+                    w.wish_link,
+                    w.wish_price,
+                    w.wishlist_id     AS w_wishlist_id
+                FROM wishlist wl
+                LEFT JOIN wish w ON wl.wishlist_id = w.wishlist_id
+                WHERE wl.wishlist_id = ?
+                """;
+
+        return jdbcTemplate.query(sql, rs -> {
+            Wishlist wishlist = null;
+
+            while (rs.next()) {
+                if (wishlist == null) {
+                    wishlist = new Wishlist(rs.getInt("wl_id"), rs.getString("wishlist_name"));
+                }
+
+                int wishId = rs.getInt("wish_id");
+                if (!rs.wasNull()) {
+                    wishlist.addWish(new Wish(
+                            wishId,
+                            rs.getString("wish_name"),
+                            rs.getString("wish_description"),
+                            rs.getString("wish_link"),
+                            rs.getDouble("wish_price"),
+                            rs.getInt("w_wishlist_id")
+                    ));
+                }
+            }
+
+            return wishlist;
+        }, id);
+    }
+
     public void deleteWishlistById(int id) {
         String sql = """
                 DELETE FROM wishlist

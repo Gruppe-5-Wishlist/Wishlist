@@ -6,10 +6,7 @@ import com.banditdev.wishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,18 @@ public class WishlistController {
         model.addAttribute("wishlists", wishlists);
 
         return "wishlist";
+    }
+
+    @GetMapping("/{id}")
+    public String viewWishlist(@PathVariable int id, HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/user/login";
+        }
+
+        Wishlist wishlist = wishlistService.findWishlistById(id);
+        model.addAttribute("wishlist", wishlist);
+
+        return "wish";
     }
 
     @PostMapping("/add")
