@@ -36,7 +36,7 @@ public class UserController {
             return "redirect:/wishlist";
         } else {
             model.addAttribute("wrongCredentials", true);
-            return "login";
+            return "redirect:/login";
         }
     }
 
@@ -56,6 +56,34 @@ public class UserController {
     public String saveNewUser(@ModelAttribute User user) {
         userService.addUser(user);
         return "redirect:/wishlist";
+    }
+
+    @GetMapping("/profile")
+    public String showProfilePage(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        model.addAttribute("user", currentUser);
+        return "profile";
+    }
+
+    @GetMapping("/profile/edit")
+    public String editProfile(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        model.addAttribute("user", currentUser);
+        return "editProfile";
+    }
+
+    @PostMapping("/profile/save")
+    public String saveProfile(@ModelAttribute User user) {
+        userService.updateUser(user);
+        return "redirect:/user/profile";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCurrentUser(HttpSession session) {
+        User currentUser = (User) session.getAttribute("user");
+        userService.deleteUser(currentUser.getUserId());
+        session.invalidate();
+        return "redirect:/";
     }
 
 }
