@@ -24,7 +24,6 @@ class UserRepositoryTest {
         User user = new User(4, "test@mail.com", "Bjørn", "pass4321");
         User savedUser = userRepository.addUser(user);
 
-        assertNotNull(savedUser.getUserId());
         assertEquals("Bjørn", savedUser.getUserName());
     }
 

@@ -19,15 +19,12 @@ class WishlistRepositoryTest {
     private WishlistRepository repository;
 
     @Test
-    void findAllWishlists() {
-    }
-
-    @Test
-    void findWishlistById() {
-    }
-
-    @Test
     void deleteWishlistById() {
+        Wishlist wishlist = new Wishlist(4, "Jul");
+        repository.addWishlist(wishlist, 1);
+        repository.deleteWishlistById(4);
+
+        assertNull(repository.findWishlistById(4));
     }
 
     @Test
@@ -37,10 +34,6 @@ class WishlistRepositoryTest {
 
         assertEquals("Jul", savedWishlist.getWishlistName());
         assertEquals(5, savedWishlist.getWishlistId());
-    }
-
-    @Test
-    void findWishlistsByUserId() {
     }
 
     @Test
