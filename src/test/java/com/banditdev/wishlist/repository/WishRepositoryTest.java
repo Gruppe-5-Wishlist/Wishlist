@@ -1,5 +1,6 @@
 package com.banditdev.wishlist.repository;
 
+import com.banditdev.wishlist.model.Wish;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,5 +37,19 @@ class WishRepositoryTest {
 
     @Test
     void updateWish() {
+        Wish updatedWish = new Wish();
+        updatedWish.setWishId(1);
+        updatedWish.setWishName("Updated Name");
+        updatedWish.setWishDescription("Updated description");
+        updatedWish.setWishLink("https://www.example.com/updated-link");
+        updatedWish.setWishPrice(100.00);
+
+        repository.updateWish(updatedWish);
+
+        Wish fetchedWish = repository.findWishById(1);
+        assertEquals("Updated Name", fetchedWish.getWishName());
+        assertEquals("Updated description", fetchedWish.getWishDescription());
+        assertEquals(100.00, fetchedWish.getWishPrice(), 0.01);
+        assertEquals("https://www.example.com/updated-link", fetchedWish.getWishLink());
     }
 }
