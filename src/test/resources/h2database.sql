@@ -1,3 +1,6 @@
+CREATE SCHEMA wishlist_db;
+SET SCHEMA wishlist_db;
+
 DROP TABLE IF EXISTS wish;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS user;
