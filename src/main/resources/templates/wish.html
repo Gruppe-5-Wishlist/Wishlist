@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title th:text="${wishlist.wishlistName} + ' — EcoWish'">Wishlist — EcoWish</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap"
+          rel="stylesheet"/>
 
-    <link rel="stylesheet" th:href="@{/styles.css}" />
-    <link rel="stylesheet" th:href="@{/wish.css}" />
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/wish.css}"/>
 </head>
 
 <body>
@@ -29,7 +30,8 @@
     <ul class="nav-links">
         <li><a th:href="@{/wishlist}">My wishlists</a></li>
         <li><a th:href="@{/user/logout}" class="btn-login">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
             </svg>
             Log out
@@ -55,7 +57,8 @@
                 <form th:action="@{'/wishlist/delete/' + ${wishlist.wishlistId}}" method="post" style="margin:0">
                     <button type="submit" class="btn-delete-wishlist" title="Delete wishlist"
                             onclick="return confirm('Are you sure you want to delete this wishlist?')">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="3 6 5 6 21 6"/>
                             <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
                             <path d="M10 11v6M14 11v6"/>
@@ -68,7 +71,8 @@
         </div>
         <div class="header-actions">
             <a class="btn-add-wish" th:href="@{'/wish/add/' + ${wishlist.wishlistId}}">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round">
                     <path d="M12 5v14M5 12h14"/>
                 </svg>
                 Add wish
@@ -93,16 +97,18 @@
                     <a class="icon-btn"
                        th:href="@{'/wish/edit/' + ${wish.wishId}}"
                        title="Edit wish">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
                             <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                         </svg>
                     </a>
                     <!-- Delete -->
                     <form th:action="@{'/wish/delete/' + ${wish.wishId}}" method="post" style="margin:0">
-                        <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
+                        <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}"/>
                         <button type="submit" class="icon-btn delete" title="Delete wish">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="3 6 5 6 21 6"/>
                                 <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
                                 <path d="M10 11v6M14 11v6"/>
@@ -116,12 +122,14 @@
             <!-- Description -->
             <p class="wish-desc" th:if="${wish.wishDescription != null and !wish.wishDescription.isEmpty()}"
                th:text="${wish.wishDescription}">Description</p>
-            <p class="no-value" th:if="${wish.wishDescription == null or wish.wishDescription.isEmpty()}">No description</p>
+            <p class="no-value" th:if="${wish.wishDescription == null or wish.wishDescription.isEmpty()}">No
+                description</p>
 
             <!-- Price -->
             <div class="wish-price"
                  th:if="${wish.wishPrice != null and wish.wishPrice > 0}"
-                 th:text="${#numbers.formatDecimal(wish.wishPrice, 1, 'COMMA', 2, 'POINT') + ' kr.'}">0.00 kr.</div>
+                 th:text="${#numbers.formatDecimal(wish.wishPrice, 1, 'COMMA', 2, 'POINT') + ' kr.'}">0.00 kr.
+            </div>
             <div class="no-value" th:if="${wish.wishPrice == null or wish.wishPrice <= 0}">No price set</div>
 
             <!-- Link -->
@@ -131,7 +139,8 @@
                target="_blank"
                rel="noopener noreferrer">
                 View item
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                     <polyline points="15 3 21 3 21 9"/>
                     <line x1="10" y1="14" x2="21" y2="3"/>
@@ -157,7 +166,7 @@
                 io.unobserve(e.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, {threshold: 0.1});
     reveals.forEach(el => io.observe(el));
 </script>
 

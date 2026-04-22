@@ -1,25 +1,21 @@
 package com.banditdev.wishlist.controller;
+
+import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.model.Wishlist;
 import com.banditdev.wishlist.repository.WishlistRepository;
 import com.banditdev.wishlist.service.WishlistService;
-import com.banditdev.wishlist.model.User;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WishlistController.class)
@@ -75,4 +71,5 @@ class WishlistControllerTest {
                 .andExpect(status().isOk());
 
         verify(wishlistService).findWishlistsByUserId(42);
-    }}
+    }
+}

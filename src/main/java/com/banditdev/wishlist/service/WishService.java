@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class WishService {
     private final WishRepository wishRepository;
+
     public WishService(WishRepository wishRepository) {
         this.wishRepository = wishRepository;
     }

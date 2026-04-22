@@ -1,211 +1,224 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-                    <head>
-                        <meta charset="UTF-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <title>EcoWish — Sustainable Gifting</title>
-                        <link rel="preconnect" href="https://fonts.googleapis.com" />
-                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-                        <link rel="stylesheet" th:href="@{/styles.css}" />
-                    </head>
-                    <body>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EcoWish — Sustainable Gifting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
 
-                    <nav id="navbar">
-                        <a href="" class="logo" title="Back to home">
+<nav id="navbar">
+    <a href="" class="logo" title="Back to home">
       <span class="logo-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
         </svg>
       </span>
-                            <span class="logo-text">EcoWish</span>
-                        </a>
+        <span class="logo-text">EcoWish</span>
+    </a>
 
-                        <ul class="nav-links">
-                            <li><a href="#how">How it works</a></li>
-                            <li><a href="#features">Features</a></li>
-                            <li><a href="#about">About us</a></li>
-                            <li><a th:href="@{/user/login}" class="btn-login">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M15 3h6v18h-6M10 17l5-5-5-5M15 12H3"/>
-                                </svg>
-                                Log in
-                            </a></li>
-                        </ul>
-                    </nav>
+    <ul class="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About us</a></li>
+        <li><a th:href="@{/user/login}" class="btn-login">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v18h-6M10 17l5-5-5-5M15 12H3"/>
+            </svg>
+            Log in
+        </a></li>
+    </ul>
+</nav>
 
-                    <section class="hero">
-                        <div class="hero-inner">
-                            <div class="hero-content">
-                                <div class="hero-tag">🌿 Sustainable gifting made simple</div>
-                                <h1 class="hero-title">
-                                    Your wishlist,<br><em>kind to the planet</em>
-                                </h1>
-                                <p class="hero-desc">
-                                    EcoWish is the wishlist platform built for people who care about what they consume. Share, discover, and give thoughtfully — with sustainability at the heart.
-                                </p>
-                                <div class="hero-cta">
-                                    <a th:href="@{/user/login}" class="btn-login">
-                                        Get started
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                    </a>
-                                    <a href="#how" class="btn-secondary">See how it works</a>
-                                </div>
-                            </div>
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-tag">🌿 Sustainable gifting made simple</div>
+            <h1 class="hero-title">
+                Your wishlist,<br><em>kind to the planet</em>
+            </h1>
+            <p class="hero-desc">
+                EcoWish is the wishlist platform built for people who care about what they consume. Share, discover, and
+                give thoughtfully — with sustainability at the heart.
+            </p>
+            <div class="hero-cta">
+                <a th:href="@{/user/login}" class="btn-login">
+                    Get started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#how" class="btn-secondary">See how it works</a>
+            </div>
+        </div>
 
-                            <div class="hero-visual">
-                                <div class="visual-card-stack">
-                                    <div class="wish-card">
-                                        <div class="card-label">Wishlist</div>
-                                        <div class="card-item">Bamboo coffee set</div>
-                                        <div class="card-sub">Organic + Fair Trade</div>
-                                    </div>
-                                    <div class="wish-card">
-                                        <div class="card-label">Wishlist</div>
-                                        <div class="card-item">Linen market bag</div>
-                                        <div class="card-sub">Natural fibres</div>
-                                        <div class="card-pill">Eco-certified</div>
-                                    </div>
-                                    <div class="wish-card">
-                                        <div class="card-label">Top wish ✦</div>
-                                        <div class="card-item">Solar reading lamp</div>
-                                        <div class="card-sub">Zero emissions · Rechargeable</div>
-                                        <div class="card-pill">Carbon neutral</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+        <div class="hero-visual">
+            <div class="visual-card-stack">
+                <div class="wish-card">
+                    <div class="card-label">Wishlist</div>
+                    <div class="card-item">Bamboo coffee set</div>
+                    <div class="card-sub">Organic + Fair Trade</div>
+                </div>
+                <div class="wish-card">
+                    <div class="card-label">Wishlist</div>
+                    <div class="card-item">Linen market bag</div>
+                    <div class="card-sub">Natural fibres</div>
+                    <div class="card-pill">Eco-certified</div>
+                </div>
+                <div class="wish-card">
+                    <div class="card-label">Top wish ✦</div>
+                    <div class="card-item">Solar reading lamp</div>
+                    <div class="card-sub">Zero emissions · Rechargeable</div>
+                    <div class="card-pill">Carbon neutral</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <section class="how" id="how">
-                        <div class="section-inner">
-                            <div class="section-header reveal">
-                                <div class="section-tag">Simple by design</div>
-                                <h2 class="section-title">How <em>EcoWish</em> works</h2>
-                            </div>
-                            <div class="steps">
-                                <div class="step reveal">
-                                    <div class="step-num">1</div>
-                                    <div class="step-title">Create your list</div>
-                                    <p class="step-desc">Sign up and build your personal wishlist with sustainable products you actually want.</p>
-                                </div>
-                                <div class="step reveal" style="transition-delay: 0.1s">
-                                    <div class="step-num">2</div>
-                                    <div class="step-title">Share with others</div>
-                                    <p class="step-desc">Send your wishlist link to friends and family — no account required to browse.</p>
-                                </div>
-                                <div class="step reveal" style="transition-delay: 0.2s">
-                                    <div class="step-num">3</div>
-                                    <div class="step-title">Give thoughtfully</div>
-                                    <p class="step-desc">Mark items as purchased to avoid duplicates, and give gifts that matter.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+<section class="how" id="how">
+    <div class="section-inner">
+        <div class="section-header reveal">
+            <div class="section-tag">Simple by design</div>
+            <h2 class="section-title">How <em>EcoWish</em> works</h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-num">1</div>
+                <div class="step-title">Create your list</div>
+                <p class="step-desc">Sign up and build your personal wishlist with sustainable products you actually
+                    want.</p>
+            </div>
+            <div class="step reveal" style="transition-delay: 0.1s">
+                <div class="step-num">2</div>
+                <div class="step-title">Share with others</div>
+                <p class="step-desc">Send your wishlist link to friends and family — no account required to browse.</p>
+            </div>
+            <div class="step reveal" style="transition-delay: 0.2s">
+                <div class="step-num">3</div>
+                <div class="step-title">Give thoughtfully</div>
+                <p class="step-desc">Mark items as purchased to avoid duplicates, and give gifts that matter.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <section class="features" id="features">
-                        <div class="section-inner">
-                            <div class="section-header reveal">
-                                <div class="section-tag">Why EcoWish</div>
-                                <h2 class="section-title">Built for <em>conscious consumers</em></h2>
-                            </div>
-                            <div class="features-grid">
-                                <div class="feature-card reveal">
-                                    <div class="feature-icon">🌱</div>
-                                    <div class="feature-title">Eco ratings</div>
-                                    <p class="feature-desc">Every item displays sustainability indicators so you always know the environmental impact.</p>
-                                </div>
-                                <div class="feature-card reveal" style="transition-delay: 0.1s">
-                                    <div class="feature-icon">🎁</div>
-                                    <div class="feature-title">No duplicate gifts</div>
-                                    <p class="feature-desc">Smart reservation system means nobody buys the same thing twice — stress-free gifting.</p>
-                                </div>
-                                <div class="feature-card reveal" style="transition-delay: 0.2s">
-                                    <div class="feature-icon">🔗</div>
-                                    <div class="feature-title">Easy sharing</div>
-                                    <p class="feature-desc">Share your list with a single link. Viewers don't need an account to see your wishes.</p>
-                                </div>
-                                <div class="feature-card reveal" style="transition-delay: 0.1s">
-                                    <div class="feature-icon">✦</div>
-                                    <div class="feature-title">Priorities & notes</div>
-                                    <p class="feature-desc">Mark your most important wishes and add personal notes or size preferences.</p>
-                                </div>
-                                <div class="feature-card reveal" style="transition-delay: 0.2s">
-                                    <div class="feature-icon">🌍</div>
-                                    <div class="feature-title">Local first</div>
-                                    <p class="feature-desc">We highlight locally sourced and zero-waste alternatives whenever they're available.</p>
-                                </div>
-                                <div class="feature-card reveal" style="transition-delay: 0.3s">
-                                    <div class="feature-icon">🔒</div>
-                                    <div class="feature-title">Private by default</div>
-                                    <p class="feature-desc">Your lists are private until you choose to share them. Full control, always.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+<section class="features" id="features">
+    <div class="section-inner">
+        <div class="section-header reveal">
+            <div class="section-tag">Why EcoWish</div>
+            <h2 class="section-title">Built for <em>conscious consumers</em></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">🌱</div>
+                <div class="feature-title">Eco ratings</div>
+                <p class="feature-desc">Every item displays sustainability indicators so you always know the
+                    environmental impact.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.1s">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-title">No duplicate gifts</div>
+                <p class="feature-desc">Smart reservation system means nobody buys the same thing twice — stress-free
+                    gifting.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.2s">
+                <div class="feature-icon">🔗</div>
+                <div class="feature-title">Easy sharing</div>
+                <p class="feature-desc">Share your list with a single link. Viewers don't need an account to see your
+                    wishes.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.1s">
+                <div class="feature-icon">✦</div>
+                <div class="feature-title">Priorities & notes</div>
+                <p class="feature-desc">Mark your most important wishes and add personal notes or size preferences.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.2s">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">Local first</div>
+                <p class="feature-desc">We highlight locally sourced and zero-waste alternatives whenever they're
+                    available.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.3s">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Private by default</div>
+                <p class="feature-desc">Your lists are private until you choose to share them. Full control, always.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <section class="about" id="about">
-                        <div class="about-inner">
-                            <div>
-                                <h2>Made by students,<br><em>for a better future</em></h2>
-                                <p>EcoWish is a school project born from a simple question: why do wishlists ignore the environmental cost of the things we want?</p>
-                                <p>We're a team of students building a full-stack platform that makes sustainable gifting as easy — and as fun — as the alternatives.</p>
-                                <p>Our mission is to prove that thoughtful consumption and great user experience can coexist.</p>
-                            </div>
-                            <div class="about-stats">
-                                <div class="stat-box">
-                                    <div class="stat-num">100%</div>
-                                    <div class="stat-label">Student built</div>
-                                </div>
-                                <div class="stat-box">
-                                    <div class="stat-num">0 ads</div>
-                                    <div class="stat-label">No tracking or selling your data</div>
-                                </div>
-                                <div class="stat-box">
-                                    <div class="stat-num">Open</div>
-                                    <div class="stat-label">Transparent & honest design</div>
-                                </div>
-                                <div class="stat-box">
-                                    <div class="stat-num">🌿</div>
-                                    <div class="stat-label">Planet-first always</div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+<section class="about" id="about">
+    <div class="about-inner">
+        <div>
+            <h2>Made by students,<br><em>for a better future</em></h2>
+            <p>EcoWish is a school project born from a simple question: why do wishlists ignore the environmental cost
+                of the things we want?</p>
+            <p>We're a team of students building a full-stack platform that makes sustainable gifting as easy — and as
+                fun — as the alternatives.</p>
+            <p>Our mission is to prove that thoughtful consumption and great user experience can coexist.</p>
+        </div>
+        <div class="about-stats">
+            <div class="stat-box">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Student built</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">0 ads</div>
+                <div class="stat-label">No tracking or selling your data</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">Open</div>
+                <div class="stat-label">Transparent & honest design</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">🌿</div>
+                <div class="stat-label">Planet-first always</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <footer>
-                        <a href="index.html" class="logo">
+<footer>
+    <a href="index.html" class="logo">
       <span class="logo-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.5 7 3 11 3 15a9 9 0 0018 0c0-4-3.5-8-9-13zM8 17a4 4 0 004-4c0-2-1.5-4-4-6-2.5 2-4 4-4 6a4 4 0 004 4z"/>
         </svg>
       </span>
-                            <span class="logo-text">EcoWish</span>
-                        </a>
-                        <p>© 2026 EcoWish — School project.</p>
-                        <ul class="footer-links">
-                            <li><a href="#how">How it works</a></li>
-                            <li><a href="#about">About us</a></li>
-                            <li><a th:href="@{/user/login}" >Log in</a></li>
-                        </ul>
-                    </footer>
+        <span class="logo-text">EcoWish</span>
+    </a>
+    <p>© 2026 EcoWish — School project.</p>
+    <ul class="footer-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#about">About us</a></li>
+        <li><a th:href="@{/user/login}">Log in</a></li>
+    </ul>
+</footer>
 
-                    <script>
-                        const nav = document.getElementById('navbar');
-                        window.addEventListener('scroll', () => {
-                            nav.classList.toggle('scrolled', window.scrollY > 10);
-                        });
+<script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
 
-                        const reveals = document.querySelectorAll('.reveal');
-                        const io = new IntersectionObserver((entries) => {
-                            entries.forEach(e => {
-                                if (e.isIntersecting) {
-                                    e.target.classList.add('visible');
-                                    io.unobserve(e.target);
-                                }
-                            });
-                        }, { threshold: 0.15 });
-                        reveals.forEach(el => io.observe(el));
-                    </script>
-                    </body>
-                    </html>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+            }
+        });
+    }, {threshold: 0.15});
+    reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

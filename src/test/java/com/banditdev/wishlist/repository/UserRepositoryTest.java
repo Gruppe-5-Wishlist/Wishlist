@@ -1,7 +1,6 @@
 package com.banditdev.wishlist.repository;
 
 import com.banditdev.wishlist.model.User;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,7 +40,6 @@ class UserRepositoryTest {
         assertNull(foundUser);
     }
 
-    //Test af findUserByEmail
     @Test
     void ReturnWhenUserEmailExists() {
         User user = new User(0, "test@mail.com", "Bjørn", "pass4321");
@@ -72,7 +70,6 @@ class UserRepositoryTest {
         assertNull(found);
     }
 
-    //Test af findUserById
     @Test
     void ReturnWhenUserExistById() {
         User user = new User(0, "test@mail.com", "Bjørn", "pass4321");
@@ -93,7 +90,6 @@ class UserRepositoryTest {
         assertNull(found);
     }
 
-    //Test af updateUser
     @Test
     void shouldUpdateUserSuccessfully() {
         User user = new User(0, "Test@mail.com", "Bjørn", "pass4321");
@@ -108,7 +104,6 @@ class UserRepositoryTest {
 
         userRepository.updateUser(updatedUser);
 
-        //Is the user changed
         User result = userRepository.findUserById(savedUser.getUserId());
 
         assertNotNull(result);

@@ -22,7 +22,9 @@
     transition: color 0.2s;
 }
 
-.breadcrumb a:hover { color: var(--sage); }
+.breadcrumb a:hover {
+    color: var(--sage);
+}
 
 .breadcrumb-sep {
     color: rgba(90, 122, 92, 0.35);
@@ -200,8 +202,10 @@
 .wish-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
     background: linear-gradient(90deg, var(--sage-lt), var(--leaf));
     opacity: 0;
     transition: opacity 0.25s ease;
@@ -212,7 +216,9 @@
     box-shadow: 0 12px 32px rgba(46, 74, 47, 0.12);
 }
 
-.wish-card:hover::before { opacity: 1; }
+.wish-card:hover::before {
+    opacity: 1;
+}
 
 .wish-card-header {
     display: flex;
@@ -237,7 +243,9 @@
     flex-shrink: 0;
 }
 
-.wish-card:hover .wish-card-actions { opacity: 1; }
+.wish-card:hover .wish-card-actions {
+    opacity: 1;
+}
 
 .icon-btn {
     width: 30px;
@@ -308,7 +316,9 @@
     margin-top: auto;
 }
 
-.wish-link:hover { color: var(--moss); }
+.wish-link:hover {
+    color: var(--moss);
+}
 
 .wish-link svg {
     width: 11px;
@@ -335,7 +345,9 @@
     justify-content: center;
 }
 
-.modal-overlay.open { display: flex; }
+.modal-overlay.open {
+    display: flex;
+}
 
 .modal {
     background: var(--white);
@@ -348,8 +360,14 @@
 }
 
 @keyframes modalIn {
-    from { opacity: 0; transform: translateY(20px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .modal-title {
@@ -448,11 +466,21 @@
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 860px) {
-    .wish-grid { grid-template-columns: repeat(2, 1fr); }
+    .wish-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 520px) {
-    .wish-wrapper { padding: 90px 1.2rem 4rem; }
-    .wish-grid { grid-template-columns: 1fr; }
-    .wish-card-actions { opacity: 1; }
+    .wish-wrapper {
+        padding: 90px 1.2rem 4rem;
+    }
+
+    .wish-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wish-card-actions {
+        opacity: 1;
+    }
 }

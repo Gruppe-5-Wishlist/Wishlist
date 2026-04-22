@@ -5,11 +5,11 @@ import java.util.List;
 
 
 public class User {
+    private final List<Wishlist> wishlists = new ArrayList<>();
     private int userId;
     private String userEmail;
     private String userName;
     private String userPassword;
-    private List<Wishlist> wishlists = new ArrayList<>();
 
 
     public User() {
@@ -42,16 +42,16 @@ public class User {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public void addWishlist(Wishlist wishlist) {
         wishlists.add(wishlist);
     }
 
     public void removeWishlist(Wishlist wishlist) {
         wishlists.remove(wishlist);
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getUserPassword() {

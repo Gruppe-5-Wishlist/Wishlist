@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -104,7 +103,6 @@ public class UserRepository {
         }
     }
 
-
     public void updateUser(User user) {
         String sql = """
                         UPDATE user
@@ -121,5 +119,3 @@ public class UserRepository {
         );
     }
 }
-
-//TODO - Make getUser() and add an ArrayList

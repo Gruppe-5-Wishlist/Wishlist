@@ -3,16 +3,14 @@ package com.banditdev.wishlist.controller;
 import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.model.Wish;
 import com.banditdev.wishlist.model.Wishlist;
-import com.banditdev.wishlist.repository.WishRepository;
 import com.banditdev.wishlist.service.WishService;
 import com.banditdev.wishlist.service.WishlistService;
-import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.mock.web.MockHttpSession;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -37,7 +35,7 @@ class WishControllerTest {
     void showAddWishForm() throws Exception {
         int wishId = 1;
         int wishlistId = 1;
-        User user = new User(1, "email@test.com","TestName","TestPassword");
+        User user = new User(1, "email@test.com", "TestName", "TestPassword");
 
         MockHttpSession testSession = new MockHttpSession();
         testSession.setAttribute("user", user);
@@ -60,7 +58,7 @@ class WishControllerTest {
     void addWish() throws Exception {
         int wishId = 1;
         int wishlistId = 1;
-        User user = new User(1, "email@test.com","TestName","TestPassword");
+        User user = new User(1, "email@test.com", "TestName", "TestPassword");
 
         MockHttpSession testSession = new MockHttpSession();
         testSession.setAttribute("user", user);
@@ -81,7 +79,7 @@ class WishControllerTest {
     void deleteWish() throws Exception {
         int wishId = 1;
         int wishlistId = 1;
-        User user = new User(1, "email@test.com","TestName","TestPassword");
+        User user = new User(1, "email@test.com", "TestName", "TestPassword");
 
         MockHttpSession testSession = new MockHttpSession();
         testSession.setAttribute("user", user);
@@ -89,15 +87,15 @@ class WishControllerTest {
         when(wishService.validateWishOwner(any(), eq(wishId))).thenReturn(true);
 
         mockMvc.perform(post("/wish/delete/{wishId}", wishId)
-                .sessionAttr("user",user).param("wishlistId", String.valueOf(wishlistId)))
-                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/"+wishlistId));
+                        .sessionAttr("user", user).param("wishlistId", String.valueOf(wishlistId)))
+                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/" + wishlistId));
     }
 
     @Test
     void updateWish() throws Exception {
         int wishId = 1;
         int wishlistId = 1;
-        User user = new User(1, "email@test.com","TestName","TestPassword");
+        User user = new User(1, "email@test.com", "TestName", "TestPassword");
 
         MockHttpSession testSession = new MockHttpSession();
         testSession.setAttribute("user", user);
@@ -105,19 +103,19 @@ class WishControllerTest {
         when(wishlistService.validateWishlistOwner(any(), eq(wishlistId))).thenReturn(true);
         when(wishService.validateWishOwner(any(), eq(wishId))).thenReturn(true);
 
-        mockMvc.perform(post("/wish/update/{wishId}", wishId).sessionAttr("user",user)
-                .param("wishName","updatedName")
-                .param("wishDescription","updatedDescription")
-                .param("wishLink","updatedLink").param("wishPrice",String.valueOf(10))
-                .param("wishlistId",String.valueOf(wishlistId)))
-                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/"+wishlistId));
+        mockMvc.perform(post("/wish/update/{wishId}", wishId).sessionAttr("user", user)
+                        .param("wishName", "updatedName")
+                        .param("wishDescription", "updatedDescription")
+                        .param("wishLink", "updatedLink").param("wishPrice", String.valueOf(10))
+                        .param("wishlistId", String.valueOf(wishlistId)))
+                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/" + wishlistId));
     }
 
     @Test
     void editWish() throws Exception {
         int wishId = 1;
         int wishlistId = 1;
-        User user = new User(1, "email@test.com","TestName","TestPassword");
+        User user = new User(1, "email@test.com", "TestName", "TestPassword");
 
         MockHttpSession testSession = new MockHttpSession();
         testSession.setAttribute("user", user);

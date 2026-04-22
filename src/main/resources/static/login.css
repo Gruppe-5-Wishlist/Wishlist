@@ -73,11 +73,11 @@
     background: rgba(90, 122, 92, 0.06);
 }
 
-     /* Subtle green tick shown after valid input */
- .login-form input:valid:not(:placeholder-shown) {
-     border-color: var(--sage);
-     background: rgba(90, 122, 92, 0.04);
- }
+/* Subtle green tick shown after valid input */
+.login-form input:valid:not(:placeholder-shown) {
+    border-color: var(--sage);
+    background: rgba(90, 122, 92, 0.04);
+}
 
 /* Error state */
 .login-form input:invalid:not(:placeholder-shown):not(:focus) {

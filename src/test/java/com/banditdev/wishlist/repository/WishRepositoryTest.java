@@ -16,7 +16,6 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @Sql(scripts = "classpath:h2database.sql", executionPhase = BEFORE_TEST_METHOD)
 class WishRepositoryTest {
 
-
     @Autowired
     private WishRepository repository;
 
