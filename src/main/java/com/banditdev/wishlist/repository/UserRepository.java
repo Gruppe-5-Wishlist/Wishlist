@@ -20,7 +20,7 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public User addUser (User user) {
+    public User addUser(User user) {
         String sql = """
                 INSERT INTO user (user_id, user_email, user_name, user_password) VALUES (?, ?, ?, ?)
                 """;
@@ -43,7 +43,7 @@ public class UserRepository {
         return new User(key.intValue(), user.getUserEmail(), user.getUserName(), user.getUserPassword());
     }
 
-    public void deleteUser (int userID) {
+    public void deleteUser(int userID) {
         String sql = """
                 DELETE FROM user
                 WHERE user_id = ?
@@ -78,7 +78,7 @@ public class UserRepository {
         }
     }
 
-    public User findUserById (int id) {
+    public User findUserById(int id) {
         String sql = """
                 SELECT
                     user_id,
@@ -88,28 +88,29 @@ public class UserRepository {
                 FROM user
                 WHERE user_id = ?
                 """;
-
-        return
-            jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                        new User(
-                            rs.getInt("user_id"),
-                            rs.getString("user_email"),
-                            rs.getString("user_name"),
-                            rs.getString("user_password")
-                        ),
-                    id
-            );
+        try {
+            return
+                    jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                                    new User(
+                                            rs.getInt("user_id"),
+                                            rs.getString("user_email"),
+                                            rs.getString("user_name"),
+                                            rs.getString("user_password")
+                                    ),
+                            id
+                    );
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 
-
-
-    public void updateUser (User user) {
+    public void updateUser(User user) {
         String sql = """
-                UPDATE user
-                SET user_email = ?, user_name = ?, user_password = ?
-                WHERE user_id = ?
-        """;
+                        UPDATE user
+                        SET user_email = ?, user_name = ?, user_password = ?
+                        WHERE user_id = ?
+                """;
 
         jdbcTemplate.update(
                 sql,

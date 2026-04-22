@@ -30,7 +30,7 @@ class UserRepositoryTest {
 
     @Test
     void deleteUser() {
-        User user = new User(0, "test@mail.com", "Bjørn", "pass4321");
+        User user = new User(1, "test@mail.com", "Bjørn", "pass4321");
         User savedUser = userRepository.addUser(user);
 
         int userId = savedUser.getUserId();
