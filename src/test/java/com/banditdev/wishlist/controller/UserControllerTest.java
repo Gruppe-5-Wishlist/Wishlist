@@ -1,16 +1,20 @@
 package com.banditdev.wishlist.controller;
 
+import com.banditdev.wishlist.model.User;
 import com.banditdev.wishlist.repository.UserRepository;
-import com.banditdev.wishlist.repository.WishlistRepository;
 import com.banditdev.wishlist.service.UserService;
-import com.banditdev.wishlist.service.WishlistService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
 class UserControllerTest {
@@ -24,39 +28,45 @@ class UserControllerTest {
     @MockitoBean
     private UserRepository userRepository;
 
+    //Redirects when user is already logged in
     @Test
-    void login() {
+    void login() throws Exception {
+        User mockUser = new User(1, "test@mail.com", "Test", "password");
+
+        mockMvc.perform(get("/user/login")
+                .sessionAttr("user", mockUser))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/wishlist"));
     }
 
+
+    //Logs out user and verifies that the user is redirected to the index page
     @Test
-    void testLogin() {
+    void logout() throws Exception {
+        User mockUser = new User(1, "test@mail.com", "Test", "password");
+
+        mockMvc.perform(get("/user/logout")
+                        .sessionAttr("user", mockUser))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+                .andExpect(request ->
+                        assertNull(request.getRequest().getSession(false))
+                );
     }
 
+    //Saves a new user
     @Test
-    void logout() {
-    }
+    void saveNewUser() throws Exception {
+        User savedUser = new User(1, "new@mail.com", "New", "password");
+        when(userService.addUser(any(User.class))).thenReturn(savedUser);
 
-    @Test
-    void createNewUser() {
-    }
+        mockMvc.perform(post("/user/save")
+                .param("userName", "New User")
+                .param("userEmail", "new@mail.com")
+                .param("userPassword", "password"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/wishlist"));
 
-    @Test
-    void saveNewUser() {
-    }
-
-    @Test
-    void showProfilePage() {
-    }
-
-    @Test
-    void editProfile() {
-    }
-
-    @Test
-    void saveProfile() {
-    }
-
-    @Test
-    void deleteCurrentUser() {
+        verify(userService).addUser(any(User.class));
     }
 }
