@@ -21,14 +21,13 @@ public class UserRepository {
 
     public User addUser(User user) {
         String sql = """
-                INSERT INTO user (user_id, user_email, user_name, user_password) VALUES (?, ?, ?, ?)
+                INSERT INTO user (user_email, user_name, user_password) VALUES (?, ?, ?, ?)
                 """;
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, user.getUserId());
             ps.setString(2, user.getUserEmail());
             ps.setString(3, user.getUserName());
             ps.setString(4, user.getUserPassword());
