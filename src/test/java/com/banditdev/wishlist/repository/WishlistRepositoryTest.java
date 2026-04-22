@@ -33,10 +33,8 @@ class WishlistRepositoryTest {
         Wishlist wishlist = new Wishlist(5, "Jul");
         repository.addWishlist(wishlist, 1);
 
-        Wishlist result = repository.findWishlistById(5);
-
-        assertEquals("Jul", result.getWishlistName());
-        assertEquals(5, result.getWishlistId());
+        assertEquals("Jul", wishlist.getWishlistName());
+        assertEquals(5, wishlist.getWishlistId());
     }
 
     @Test

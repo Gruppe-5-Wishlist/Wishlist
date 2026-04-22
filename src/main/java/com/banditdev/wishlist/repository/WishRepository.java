@@ -53,7 +53,7 @@ public class WishRepository {
 
     public Wish addWish(Wish wish, int wishlistId) {
         String sql = """
-                INSERT INTO wish (wish_name, wish_description, wish_link, wish_price, wishlist_id)
+                INSERT INTO wishlist_db.wish (wish_name, wish_description, wish_link, wish_price, wishlist_id)
                 VALUES (?, ?, ?, ?, ?)
                 """;
 
