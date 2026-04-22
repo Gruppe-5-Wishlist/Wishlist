@@ -1,5 +1,6 @@
 package com.banditdev.wishlist.repository;
 
+import com.banditdev.wishlist.model.Wishlist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +32,11 @@ class WishlistRepositoryTest {
 
     @Test
     void addWishlist() {
+        Wishlist wishlist = new Wishlist(1, "Jul");
+        Wishlist savedWishlist = repository.addWishlist(wishlist, 1);
+
+        assertEquals("Jul", savedWishlist.getWishlistName());
+        assertEquals(5, savedWishlist.getWishlistId());
     }
 
     @Test
