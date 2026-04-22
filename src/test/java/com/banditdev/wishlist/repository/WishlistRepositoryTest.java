@@ -29,14 +29,25 @@ class WishlistRepositoryTest {
 
     @Test
     void addWishlist() {
-        Wishlist wishlist = new Wishlist(1, "Jul");
-        Wishlist savedWishlist = repository.addWishlist(wishlist, 1);
+        Wishlist wishlist = new Wishlist(5, "Jul");
+        repository.addWishlist(wishlist, 1);
 
-        assertEquals("Jul", savedWishlist.getWishlistName());
-        assertEquals(5, savedWishlist.getWishlistId());
+        assertEquals("Jul", wishlist.getWishlistName());
+        assertEquals(5, wishlist.getWishlistId());
     }
 
     @Test
     void updateWishlist() {
+        Wishlist wishlist = new Wishlist(4, "Jul");
+        repository.addWishlist(wishlist, 1);
+
+        assertEquals("Jul", wishlist.getWishlistName());
+        assertEquals(4, wishlist.getWishlistId());
+
+        wishlist.setWishlistName("Fødselsdag");
+        repository.updateWishlist(wishlist);
+
+        assertEquals("Fødselsdag", wishlist.getWishlistName());
+        assertEquals(4, wishlist.getWishlistId());
     }
 }
