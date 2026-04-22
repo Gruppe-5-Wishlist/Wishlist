@@ -49,7 +49,7 @@ class WishRepositoryTest {
         Wish fetchedWish = repository.findWishById(1);
         assertEquals("Updated Name", fetchedWish.getWishName());
         assertEquals("Updated description", fetchedWish.getWishDescription());
-        assertEquals(100.00, fetchedWish.getWishPrice(), 0.01);
+        assertEquals(100.00, fetchedWish.getWishPrice());
         assertEquals("https://www.example.com/updated-link", fetchedWish.getWishLink());
     }
 }
