@@ -8,6 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 @SpringBootTest
@@ -34,7 +35,7 @@ class WishRepositoryTest {
     @Test
     void deleteWishById() {
         int wishListId = 1;
-        int wishId = 1;
+        int wishId = 8;
         Wish testWish = new Wish(wishId, "testName", "Test Description", "test@link.dk", 100.0, wishListId);
 
 

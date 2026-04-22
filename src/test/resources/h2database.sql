@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS wishlist_db CASCADE;
 CREATE SCHEMA wishlist_db;
 SET SCHEMA wishlist_db;
 
