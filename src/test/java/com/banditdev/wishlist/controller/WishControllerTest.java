@@ -91,7 +91,6 @@ class WishControllerTest {
         mockMvc.perform(post("/wish/delete/{wishId}", wishId)
                 .sessionAttr("user",user).param("wishlistId", String.valueOf(wishlistId)))
                 .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/"+wishlistId));
-
     }
 
     @Test
@@ -112,7 +111,6 @@ class WishControllerTest {
                 .param("wishLink","updatedLink").param("wishPrice",String.valueOf(10))
                 .param("wishlistId",String.valueOf(wishlistId)))
                 .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/"+wishlistId));
-
     }
 
     @Test
